@@ -169,6 +169,8 @@
 // ═══════════════════════════════════════════════
 (function(){
   const svg = document.getElementById('transformer-svg');
+  const noteToggle = document.getElementById('transformer-note-toggle');
+  const notePanel = document.getElementById('transformer-reading-note');
   const layers = [
     { label: '输入 Token', color: '#946800', y: 310 },
     { label: 'Token Embedding', color: '#946800', y: 272 },
@@ -179,11 +181,15 @@
     { label: '输出 Logits', color: '#00875A', y: 50 },
   ];
 
-  let html = '';
+  let html = '<defs><marker id="transformer-flow-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#00875A"/></marker></defs>';
   for (let i = 0; i < 8; i++) {
     html += `<line x1="${45*i}" y1="0" x2="${45*i}" y2="340" stroke="rgba(216,208,194,0.7)" stroke-width=".5"/>`;
     html += `<line x1="0" y1="${45*i}" x2="360" y2="${45*i}" stroke="rgba(216,208,194,0.7)" stroke-width=".5"/>`;
   }
+
+  html += `<line x1="18" y1="306" x2="18" y2="58" stroke="#00875A" stroke-width="1.4" stroke-linecap="round" marker-end="url(#transformer-flow-arrow)"/>`;
+  html += `<text x="16" y="28" font-family="JetBrains Mono" font-size="9" fill="#00875A" text-anchor="start">执行顺序：自下而上</text>`;
+  html += `<text x="9" y="184" transform="rotate(-90 9 184)" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#00875A">输入 Token → 输出 Logits</text>`;
 
   layers.forEach((layer, i) => {
     const isMain = i >= 2 && i <= 3;
@@ -192,9 +198,12 @@
     html += `<rect x="30" y="${layer.y - h/2}" width="300" height="${h}" rx="5" fill="${layer.color}${alpha}" stroke="${layer.color}40" stroke-width="1.5"/>`;
     html += `<text x="180" y="${layer.y + 5}" text-anchor="middle" font-family="JetBrains Mono" font-size="${isMain ? 11 : 10}" fill="${layer.color}">${layer.label}</text>`;
     if (i < layers.length - 1) {
-      const nextY = layers[i+1].y + (isMain ? 16 : 13);
-      html += `<line x1="180" y1="${layer.y - h/2}" x2="180" y2="${nextY + 2}" stroke="${layer.color}50" stroke-width="1" stroke-dasharray="${i>=4?'3,3':''}"/>`;
-      html += `<polygon points="175,${nextY + 8} 185,${nextY + 8} 180,${nextY + 14}" fill="${layers[i+1].color}80"/>`;
+      const nextIsMain = i + 1 >= 2 && i + 1 <= 3;
+      const nextH = nextIsMain ? 32 : 26;
+      const currentTop = layer.y - h/2;
+      const nextBottom = layers[i+1].y + nextH/2;
+      html += `<line x1="180" y1="${currentTop - 2}" x2="180" y2="${nextBottom + 10}" stroke="${layer.color}50" stroke-width="1" stroke-dasharray="${i>=4?'3,3':''}"/>`;
+      html += `<polygon points="180,${nextBottom + 1} 175,${nextBottom + 10} 185,${nextBottom + 10}" fill="${layers[i+1].color}80"/>`;
     }
   });
 
@@ -202,6 +211,14 @@
   html += `<circle cx="270" cy="220" r="4" fill="#635BFF" opacity="0.55"><animate attributeName="r" values="3;6;3" dur="2s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.55;1;0.55" dur="2s" begin="1s" repeatCount="indefinite"/></circle>`;
 
   svg.innerHTML = html;
+
+  if (noteToggle && notePanel) {
+    noteToggle.addEventListener('click', () => {
+      const isOpen = noteToggle.getAttribute('aria-expanded') === 'true';
+      noteToggle.setAttribute('aria-expanded', String(!isOpen));
+      notePanel.hidden = isOpen;
+    });
+  }
 })();
 
 // ═══════════════════════════════════════════════

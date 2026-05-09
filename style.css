@@ -189,6 +189,18 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.75;margin-bottom:16p
 .training-text .coherent{color:var(--txt-b)}
 .training-text .incoherent{color:var(--txt2);font-style:italic}
 .transformer-visual{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative}
+.transformer-diagram-wrap{position:relative;margin-bottom:14px}
+.transformer-note-toggle{position:absolute;right:12px;top:12px;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:6px 11px;border:1px solid rgba(0,135,90,0.24);border-radius:var(--radius-sm);background:rgba(255,255,255,0.92);color:var(--green);font-family:var(--ds);font-size:11px;font-weight:700;letter-spacing:.04em;cursor:pointer;box-shadow:var(--shadow-sm);transition:background .15s,border-color .15s,color .15s}
+.transformer-note-toggle:hover{background:rgba(0,135,90,0.08);border-color:rgba(0,135,90,0.36)}
+.transformer-note-chevron{font-size:13px;line-height:1;transition:transform .15s}
+.transformer-note-toggle[aria-expanded="true"] .transformer-note-chevron{transform:rotate(180deg)}
+.transformer-reading-note{margin:-2px 0 16px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:0 var(--radius) var(--radius) 0;padding:16px 18px;box-shadow:var(--shadow-sm)}
+.transformer-note-kicker{font-family:var(--ds);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.transformer-note-flow{font-family:var(--dm);font-size:12px;line-height:1.6;color:var(--txt-b);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 11px;margin-bottom:12px;overflow-x:auto;white-space:nowrap}
+.transformer-note-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0;color:var(--txt);font-family:var(--db);font-size:13px;line-height:1.65}
+.transformer-note-list li{padding-left:13px;border-left:1px solid rgba(0,135,90,0.24)}
+.transformer-note-list strong{color:var(--green);font-family:var(--ds);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:5px}
+.transformer-note-example{margin-top:12px;padding:9px 11px;background:rgba(0,135,90,0.06);border:1px solid rgba(0,135,90,0.16);border-radius:var(--radius-sm);font-family:var(--dm);font-size:11.5px;color:var(--green);line-height:1.55}
 
 /* ── SECTION 5: INFERENCE ── */
 .inference-demo{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
@@ -290,6 +302,8 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.75;margin-bottom:16p
 @media(max-width:600px){
   .rlhf-row{flex-direction:column}
   .inference-controls{flex-direction:column;align-items:flex-start}
+  .transformer-note-toggle{position:static;width:100%;justify-content:center;margin-top:8px;background:var(--card)}
+  .transformer-note-flow{white-space:normal}
   #hero-canvas{opacity:0.12}
   .hero-stats{display:grid;grid-template-columns:1fr 1fr;border:none;gap:0;margin-bottom:32px}
   .stat-item{padding:14px 16px;margin-right:0;border-right:none;border-bottom:1px solid var(--border)}

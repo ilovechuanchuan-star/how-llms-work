@@ -182,7 +182,23 @@
       </div>
       <div class="fade-up" style="animation-delay:.15s">
         <h3 class="sub-title">Transformer 架构</h3>
-        <svg id="transformer-svg" viewBox="0 0 360 340" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block;margin-bottom:16px" role="img" aria-label="Transformer 架构示意图，展示数据从输入 token 经过 embedding、attention 和前馈层最终输出 logits 的流向"><title>Transformer 架构</title></svg>
+        <div class="transformer-diagram-wrap">
+          <svg id="transformer-svg" viewBox="0 0 360 340" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block" role="img" aria-label="Transformer 架构示意图，展示数据从输入 token 经过 embedding、attention 和前馈层最终输出 logits 的流向" aria-describedby="transformer-reading-note"><title>Transformer 架构</title></svg>
+          <button class="transformer-note-toggle" id="transformer-note-toggle" type="button" aria-expanded="false" aria-controls="transformer-reading-note">
+            阅读笔记
+            <span class="transformer-note-chevron" aria-hidden="true">⌄</span>
+          </button>
+        </div>
+        <div class="transformer-reading-note" id="transformer-reading-note" hidden>
+          <div class="transformer-note-kicker">这张图怎么读</div>
+          <div class="transformer-note-flow">输入 Token → Token Embedding → Transformer Block(s) → 输出 Logits</div>
+          <ul class="transformer-note-list">
+            <li><strong>执行顺序：</strong>这张结构图应自下而上读，也就是输入 Token → 输出 Logits。作者把输出画在顶部，是神经网络架构图常见的层叠画法，不表示先从 Logits 开始。</li>
+            <li><strong>推理时：</strong>你输入的一句话或一段话会先被分词成一整串 token，作为当前上下文整体进入模型；模型主要使用最后一个位置的 logits 选择下一个 token，再追加回上下文继续生成。</li>
+            <li><strong>训练时：</strong>输入也不是单个 token，而是一段 token 序列。“采样一段 token 窗口”指从长训练语料中截取连续 token 片段，让窗口内每个位置学习预测右边的下一个 token。</li>
+          </ul>
+          <div class="transformer-note-example">例：输入 token3 token4 token5 token6；目标 token4 token5 token6 token7。</div>
+        </div>
         <div class="insight-box">
           <strong>什么是 Embedding？</strong>
           每个 token ID 会映射到一个学习得到的高维向量，称作它的 <em>embedding</em>，维度从数千到上万不等，具体取决于模型规模。可以把它理解为意义空间中的一个坐标——初始随机，再由训练塑形。同一个 token（比如 "bank"）总是以同一个 embedding 向量进入网络。<em>注意力层（attention）</em>随后会把上下文 token 的信息混入其中，所以当 "bank" 流到更深层时，"river bank（河岸）"和 "bank account（银行账户）"会带有完全不同的表示。一词多义是靠上下文消解的，而不是给一个 token 存多个含义。
@@ -230,6 +246,10 @@
       <div class="chapter-badge">第 1 章 · 预训练 · 阶段 4</div>
       <h2 class="section-title">推理与<br>Token 采样</h2>
       <p class="body-text">训练完成后，网络以自回归方式生成文本：输入一段 token → 得到所有 10 万个候选 token 的<span class="highlight">概率分布</span> → 采样一个 → 追加 → 重复。</p>
+      <div class="insight-box" style="margin-top:14px;margin-bottom:16px">
+        <strong>什么是自回归？</strong>
+        模型不是一次性写完整段回答，而是根据已有 token 预测下一个 token。这个新 token 会被追加回上下文，参与下一步预测；所以“自”指自己刚生成的 token 会被追加回上下文，“回归”可以粗略理解为基于过去序列预测下一个值。GPT、Llama、Claude 这类聊天模型主要就是这样逐 token 续写。其他路线也存在，例如 BERT 式遮罩预测、非自回归生成或迭代式文本生成，但它们不是这里这个“下一个 token → 追加 → 重复”的主流程。
+      </div>
       <p class="body-text">这个过程是<span class="highlight-a">随机的</span>——同样的 prompt 每次产生不同输出，因为我们在掷一枚有偏的硬币。概率高的 token 更有可能被选中，但并不保证。</p>
       <p class="body-text"><span class="highlight">Temperature</span> 控制随机性。低 temperature（0.1）→ 模型总挑最高概率的 token；高 temperature（2.0）→ 接近均匀的混乱。0.7–1.0 是兼顾连贯与创造性的甜区。</p>
       <div class="insight-box">
