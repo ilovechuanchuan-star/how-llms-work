@@ -70,10 +70,10 @@ function scaleCanvas(canvas, nativeW, nativeH) {
   const el = document.getElementById('tw-response');
   if (!el) return;
   const messages = [
-    "A neural network is a function with millions of adjustable knobs (weights). Training turns the knobs until the function's outputs match the examples it's shown.",
-    "Every word GPT generates is computed by the same forward pass you'll build here — just with 405 billion weights instead of 19.",
-    "Backpropagation isn't magic: it's the chain rule applied recursively. Every weight gets told exactly how much it contributed to the error.",
-    "Gradient descent is just: move each weight a tiny step in the direction that reduces the loss. Repeat a billion times. That's training."
+    "神经网络就是一个带有数百万可调旋钮（权重）的函数。训练就是不断拧旋钮，直到函数输出与给它看的样例匹配。",
+    "GPT 输出的每一个词，都是用你即将搭出的同一种前向传播算出的——只是权重数从 19 个变成了 4050 亿。",
+    "反向传播不是魔法：它就是递归地应用链式法则。每个权重都被精确告知它对误差贡献了多少。",
+    "梯度下降无非是：把每个权重沿着减小 loss 的方向挪一小步。重复十亿次。这就是训练。"
   ];
   let mi = 0, ci = 0, deleting = false;
 
@@ -423,9 +423,9 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     ctx.fillStyle = '#697386'; ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'left';
     ctx.fillText('Loss ↑', 6, 16);
     ctx.textAlign = 'center';
-    ctx.fillText('weight →', W/2, H - 2);
+    ctx.fillText('权重 →', W/2, H - 2);
     ctx.fillStyle = '#00875A';
-    ctx.fillText('min', wToX(0), lossToY(0.3) - 10);
+    ctx.fillText('最低', wToX(0), lossToY(0.3) - 10);
 
     // Current values display
     document.getElementById('loss-w-val').textContent = w.toFixed(3);
@@ -616,9 +616,9 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     });
 
     // Legend
-    html += `<text x="10" y="245" font-family="Inter" font-size="10" fill="#697386">a=2, b=-3. Forward: multiply → add → tanh.</text>`;
+    html += `<text x="10" y="245" font-family="Inter" font-size="10" fill="#697386">a=2, b=-3。前向：乘 → 加 → tanh。</text>`;
     if (showGrads) {
-      html += `<text x="10" y="258" font-family="Inter" font-size="10" fill="#635BFF">Backprop: gradients flow right→left via chain rule.</text>`;
+      html += `<text x="10" y="258" font-family="Inter" font-size="10" fill="#635BFF">反向传播：梯度通过链式法则从右向左流动。</text>`;
     }
 
     svg.innerHTML = html;
@@ -705,7 +705,7 @@ function scaleCanvas(canvas, nativeW, nativeH) {
     ctx.beginPath(); ctx.moveTo(PAD.left, H-PAD.bottom); ctx.lineTo(W-PAD.right, H-PAD.bottom); ctx.stroke();
 
     ctx.fillStyle = '#697386'; ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'center';
-    ctx.fillText('Training Steps →', W/2, H-4);
+    ctx.fillText('训练步数 →', W/2, H-4);
     ctx.save(); ctx.rotate(-Math.PI/2); ctx.fillText('Loss', -H/2, 12); ctx.restore();
   }
 

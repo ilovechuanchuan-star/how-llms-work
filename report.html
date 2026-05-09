@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLM Council Fact-Check Report</title>
+<title>LLM 委员会事实核查报告</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -80,227 +80,227 @@ body{background:var(--bg);color:var(--txt);font-family:var(--db);font-size:16px;
 <body>
 
 <div class="top-bar">
-  <span class="top-bar-brand">How LLMs Work</span>
+  <span class="top-bar-brand">LLM 是怎么工作的</span>
   <span class="top-bar-sep">/</span>
-  <span class="top-bar-title">Council Report</span>
-  <a href="index.html" class="top-bar-back">← Back to guide</a>
+  <span class="top-bar-title">委员会报告</span>
+  <a href="index.html" class="top-bar-back">← 返回指南</a>
 </div>
 
 <main class="page">
 
   <header class="report-header">
-    <div class="report-kicker">Fact-Check Report</div>
-    <h1 class="report-title">LLM Council</h1>
+    <div class="report-kicker">事实核查报告</div>
+    <h1 class="report-title">LLM 委员会</h1>
     <div class="report-meta">
-      <div class="meta-item">Generated <span>2026-04-26</span></div>
-      <div class="meta-item">Synthesised by <span>Claude Opus 4.7</span></div>
+      <div class="meta-item">生成时间 <span>2026-04-26</span></div>
+      <div class="meta-item">综合人 <span>Claude Opus 4.7</span></div>
     </div>
     <div class="council-row">
       <div class="model-pill">GPT-4.1</div>
       <div class="model-pill">Gemini 2.5 Pro</div>
       <div class="model-pill">Llama 4 Maverick</div>
     </div>
-    <p class="anon-note">Reviews were anonymised before synthesis — the synthesiser did not know which model produced which findings.</p>
+    <p class="anon-note">评审意见在综合前已被匿名化——综合者并不知道哪个发现来自哪个模型。</p>
   </header>
 
   <section class="synthesis">
 
-    <div class="section-label">High Confidence — flagged by 2+ models</div>
+    <div class="section-label">高置信度 —— 被 2 名及以上模型标记</div>
     <div class="issue-list">
 
       <div class="issue-card">
-        <span class="issue-tag tag-high">High confidence</span>
-        <div class="issue-claim">Common Crawl — indexing 2.7 billion pages by 2024</div>
-        <div class="issue-body">The 2.7B figure refers to a single crawl dump processed for FineWeb, not the cumulative archive since 2007 which is vastly larger. The phrasing implies a running total, which is misleading.</div>
+        <span class="issue-tag tag-high">高置信度</span>
+        <div class="issue-claim">Common Crawl —— 截至 2024 年索引 27 亿页</div>
+        <div class="issue-body">27 亿这个数字指的是为 FineWeb 处理的某次单一抓取转储，而非自 2007 年以来的累计存档——后者要大得多。当前措辞暗示是累计总量，具有误导性。</div>
       </div>
 
       <div class="issue-card">
-        <span class="issue-tag tag-high">High confidence</span>
-        <div class="issue-claim">GPT-4 uses a vocabulary of 100,277 tokens via BPE</div>
-        <div class="issue-body">OpenAI has never officially confirmed GPT-4's vocabulary size. The 100,277 figure is the <code>cl100k_base</code> tokenizer associated with GPT-3.5/GPT-4 era models, but attributing it specifically to GPT-4 is unverified. Worth softening to "approximately 100K tokens."</div>
+        <span class="issue-tag tag-high">高置信度</span>
+        <div class="issue-claim">GPT-4 通过 BPE 使用 100,277 个 token 的词表</div>
+        <div class="issue-body">OpenAI 从未官方确认 GPT-4 的词表大小。100,277 是 GPT-3.5 / GPT-4 时代相关的 <code>cl100k_base</code> 分词器规模，把它特定归到 GPT-4 头上未经核实。建议软化为"约 10 万 token"。</div>
       </div>
 
       <div class="issue-card">
-        <span class="issue-tag tag-high">High confidence</span>
-        <div class="issue-claim">GPT-2 training cost ~$40K; same quality today for ~$100</div>
-        <div class="issue-body">The $100 figure is a significant underestimate without context. Training a 1.5B parameter model from scratch still costs thousands of dollars. The $100 figure likely refers to toy-scale reproductions (e.g. Karpathy's nanoGPT), not full GPT-2 quality. Needs clarification.</div>
+        <span class="issue-tag tag-high">高置信度</span>
+        <div class="issue-claim">GPT-2 训练成本约 4 万美元；如今同等质量约 100 美元</div>
+        <div class="issue-body">缺乏背景的话，100 美元这一数字严重低估。从零训练一个 15 亿参数模型仍需几千美元。100 美元这一数字很可能指向玩具级复现（例如 Karpathy 的 nanoGPT），而非完整 GPT-2 质量。需要澄清。</div>
       </div>
 
       <div class="issue-card">
-        <span class="issue-tag tag-high">High confidence</span>
-        <div class="issue-claim">ChatGPT is "imitating what a skilled developer-labeler would write"</div>
-        <div class="issue-body">Misleading framing — coding ability and core knowledge come from pre-training on vast internet data, not from SFT labelers. SFT shapes style and assistant behaviour; it does not create underlying skills from scratch.</div>
+        <span class="issue-tag tag-high">高置信度</span>
+        <div class="issue-claim">ChatGPT 在"模仿一名熟练的开发者标注员会怎么写"</div>
+        <div class="issue-body">表述具有误导性——编码能力与核心知识来自在海量互联网数据上的预训练，而不是来自 SFT 标注员。SFT 塑造的是风格与助手行为，并不会从零创造底层技能。</div>
       </div>
 
       <div class="issue-card">
-        <span class="issue-tag tag-high">High confidence — likely defensible</span>
-        <div class="issue-claim">Llama 3: 405B params, 15T tokens</div>
-        <div class="issue-body">Two models flagged this, but Llama 3.1 405B was publicly released in July 2024 with a 15T-token training set — so the claim appears correct. The flags reflect outdated reviewer knowledge. Worth adding a citation to confirm.</div>
+        <span class="issue-tag tag-high">高置信度 —— 很可能站得住脚</span>
+        <div class="issue-claim">Llama 3：4050 亿参数、15 万亿 token</div>
+        <div class="issue-body">两个模型给出了标记，但 Llama 3.1 405B 已于 2024 年 7 月公开发布，训练集为 15 万亿 token——所以该论断看上去是正确的。这些标记反映了评审知识的过期。建议补一条引用以确认。</div>
       </div>
 
     </div>
 
-    <div class="section-label">Lower Confidence — flagged by 1 model</div>
+    <div class="section-label">较低置信度 —— 被 1 名模型标记</div>
     <div class="issue-list">
 
       <div class="issue-card lower">
-        <span class="issue-tag tag-low">Worth reviewing</span>
-        <div class="issue-claim">44 TB FineWeb represents ~15 trillion tokens</div>
-        <div class="issue-body">FineWeb's published token count is approximately 15T tokens in its standard release. One reviewer claimed 22T — worth verifying against HuggingFace's published figures directly.</div>
+        <span class="issue-tag tag-low">值得复核</span>
+        <div class="issue-claim">44 TB 的 FineWeb 约对应 15 万亿 token</div>
+        <div class="issue-body">FineWeb 标准发布版公布的 token 数大约是 15T。一名评审声称是 22T——值得直接对照 HuggingFace 公布的数据复核。</div>
       </div>
 
       <div class="issue-card lower">
-        <span class="issue-tag tag-low">Worth reviewing</span>
-        <div class="issue-claim">GPT-2 trained on 100B tokens</div>
-        <div class="issue-body">GPT-2 was trained on WebText (~40GB), typically estimated at 20–30B tokens. The 100B figure appears overstated.</div>
+        <span class="issue-tag tag-low">值得复核</span>
+        <div class="issue-claim">GPT-2 在 1000 亿 token 上训练</div>
+        <div class="issue-body">GPT-2 在 WebText（约 40GB）上训练，通常被估计在 200–300 亿 token。1000 亿这一数字显得偏高。</div>
       </div>
 
       <div class="issue-card lower">
-        <span class="issue-tag tag-low">Worth reviewing</span>
-        <div class="issue-claim">Embedding size ~1,000–4,000 numbers</div>
-        <div class="issue-body">Frontier models often use embedding dimensions exceeding 8,000. The upper bound of 4,000 is too narrow for current models.</div>
+        <span class="issue-tag tag-low">值得复核</span>
+        <div class="issue-claim">Embedding 维度约 1,000–4,000</div>
+        <div class="issue-body">前沿模型经常使用超过 8,000 的 embedding 维度。4,000 这个上限对当前模型而言偏窄。</div>
       </div>
 
       <div class="issue-card lower">
-        <span class="issue-tag tag-low">Worth reviewing</span>
-        <div class="issue-claim">RLHF produces "more honest" responses</div>
-        <div class="issue-body">RLHF optimises for human preference, not truthfulness — and can reinforce sycophancy or hallucination if raters prefer confident-sounding wrong answers. "More helpful and better structured" is safer wording.</div>
+        <span class="issue-tag tag-low">值得复核</span>
+        <div class="issue-claim">RLHF 产生"更诚实"的回答</div>
+        <div class="issue-body">RLHF 优化的是人类偏好，而不是真实性——如果评分员偏好"听上去自信但其实错了"的回答，反而会强化谄媚或幻觉。"更有用且结构更好"是更稳的措辞。</div>
       </div>
 
       <div class="issue-card lower">
-        <span class="issue-tag tag-low">Worth reviewing</span>
-        <div class="issue-claim">PII removal finds "named individuals"</div>
-        <div class="issue-body">Full removal of all named persons is infeasible and not what filtering pipelines actually do. "Attempts to detect" is more accurate.</div>
+        <span class="issue-tag tag-low">值得复核</span>
+        <div class="issue-claim">PII 移除会找出"具名个人"</div>
+        <div class="issue-body">完全移除所有具名人物在工程上不可行，过滤流水线实际也不会这么做。"尝试检测"是更准确的措辞。</div>
       </div>
 
       <div class="issue-card dismiss">
-        <span class="issue-tag tag-dismiss">Dismissed — intentional simplification</span>
-        <div class="issue-claim">SFT duration: "hours (not months)"</div>
-        <div class="issue-body">Borderline over-pedantic. Reads as a pedagogical contrast with pre-training duration, not a precise claim.</div>
+        <span class="issue-tag tag-dismiss">驳回 —— 有意为之的简化</span>
+        <div class="issue-claim">SFT 时长："小时级（不是数月）"</div>
+        <div class="issue-body">偏严苛但可接受。读起来像是在与预训练时长做教学对比，并非精确论断。</div>
       </div>
 
       <div class="issue-card dismiss">
-        <span class="issue-tag tag-dismiss">Dismissed — intentional simplification</span>
-        <div class="issue-claim">The model doesn't "think" — it computes a probability distribution</div>
-        <div class="issue-body">Standard accepted simplification for explaining next-token prediction. Not misleading in context.</div>
+        <span class="issue-tag tag-dismiss">驳回 —— 有意为之的简化</span>
+        <div class="issue-claim">模型不会"思考"——它在算概率分布</div>
+        <div class="issue-body">解释下一 token 预测时被普遍接受的标准简化。在该语境下并不具误导性。</div>
       </div>
 
     </div>
 
     <div class="summary-box">
-      <div class="summary-label">Overall Assessment</div>
-      The guide is largely sound as an educational overview, but several specific numerical claims need correction or clarification. The most serious issues are the <strong style="color:#fff">GPT-2-to-$100 cost comparison</strong> (needs context about scale), the <strong style="color:#fff">Common Crawl page count</strong> (conflates a single dump with the full archive), and the <strong style="color:#fff">"imitating a developer-labeler" framing</strong> (understates pre-training's role). The GPT-4 tokenizer and Llama 3 specs are defensible but should be sourced. Several flags target intentional simplifications appropriate for an educational context and can be dismissed.
+      <div class="summary-label">总体评估</div>
+      作为入门级科普概览，本指南整体是稳的，但若干具体数值需要修正或澄清。最严重的问题是<strong style="color:#fff">GPT-2 到 100 美元的成本对比</strong>（需要补充规模背景）、<strong style="color:#fff">Common Crawl 页面计数</strong>（把单次转储与整份存档混为一谈）以及<strong style="color:#fff">"模仿开发者标注员"的表述</strong>（低估了预训练的角色）。GPT-4 分词器与 Llama 3 规格虽可成立，但应附出处。多条标记针对的是面向教学的有意简化，可以驳回。
     </div>
 
   </section>
 
   <section class="raw-section">
-    <div class="section-label">Raw Findings by Model</div>
+    <div class="section-label">各模型原始发现</div>
 
     <div class="model-block">
-      <div class="model-name">GPT-4.1 — 6 issues</div>
+      <div class="model-name">GPT-4.1 —— 6 项</div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Llama 3: 405B params, 15T tokens</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>As of mid-2024, the largest publicly disclosed Llama 3 model was 70B parameters. (Note: Llama 3.1 405B was released July 2024 — this flag appears outdated.)</div>
+        <div class="raw-field"><span class="raw-label">声明</span>Llama 3：4050 亿参数、15 万亿 token</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>截至 2024 年中，公开披露的最大 Llama 3 模型为 70B 参数。（注：Llama 3.1 405B 已于 2024 年 7 月发布——该标记看上去过期。）</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>GPT-4 uses a vocabulary of 100,277 tokens via BPE</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>The 100,277 figure is accurate for cl100k_base but not officially confirmed for GPT-4 specifically.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>GPT-4 通过 BPE 使用 100,277 个 token 的词表</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>100,277 对 cl100k_base 准确，但官方未对 GPT-4 加以确认。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Embedding size ~1,000–4,000 numbers</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Most frontier models use 2,048–8,192+ dimensions. The upper bound of 4,000 is too narrow.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>Embedding 维度约 1,000–4,000</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>大多数前沿模型使用 2,048–8,192 及以上维度。4,000 上限偏窄。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>The model learns grammar, facts, reasoning patterns implicitly</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Overstates robustness of learned reasoning. (Dismissed as acceptable simplification.)</div>
+        <div class="raw-field"><span class="raw-label">声明</span>模型隐式地学习语法、事实、推理模式</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>高估了所学推理能力的稳健性。（已驳回，视为可接受的简化。）</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>SFT duration: hours (not months)</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Large-scale SFT can take days. (Dismissed as intentional simplification.)</div>
+        <div class="raw-field"><span class="raw-label">声明</span>SFT 时长：小时级（不是数月）</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>大规模 SFT 可能耗费数天。（已驳回，视为有意为之的简化。）</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>RLHF produces responses that are "more honest"</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>RLHF optimises for human preference, not truthfulness — can reinforce sycophancy.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>RLHF 产生"更诚实"的回答</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>RLHF 优化的是人类偏好而非真实性——可能强化谄媚。</div>
       </div>
     </div>
 
     <div class="model-block">
-      <div class="model-name">Gemini 2.5 Pro — 6 issues</div>
+      <div class="model-name">Gemini 2.5 Pro —— 6 项</div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Common Crawl — indexing 2.7 billion pages by 2024</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Refers to a single FineWeb crawl dump, not the cumulative archive since 2007.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>Common Crawl —— 截至 2024 年索引 27 亿页</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>该数字对应的是某次单一 FineWeb 抓取转储，而非自 2007 年以来的累计存档。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>44 TB FineWeb = ~15 trillion tokens</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-wrong">wrong</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Reviewer claims FineWeb contains ~22T tokens; the 15T figure is Llama 3's training mix. Needs verification against HuggingFace's published figures.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>44 TB FineWeb = 约 15 万亿 token</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-wrong">错误</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>评审声称 FineWeb 约含 22T token；15T 是 Llama 3 的训练混合数据。需对照 HuggingFace 公布数据核实。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>PII removal finds "named individuals"</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Full removal of all named persons is infeasible; pipelines focus on PII patterns, not all proper names.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>PII 移除会找出"具名个人"</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>完全移除所有具名人物不可行；流水线聚焦的是 PII 模式，而不是所有专有名词。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>GPT-2 trained on 100B tokens</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-wrong">wrong</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>WebText (~40GB) corresponds to ~20–30B tokens, not 100B.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>GPT-2 在 1000 亿 token 上训练</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-wrong">错误</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>WebText（约 40GB）大约对应 200–300 亿 token，而非 1000 亿。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Same GPT-2 quality today for ~$100</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-wrong">wrong</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Training a 1.5B model from scratch still costs thousands of dollars. The $100 figure applies only to toy-scale runs.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>如今同等 GPT-2 质量约 100 美元</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-wrong">错误</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>从零训练 1.5B 模型仍需几千美元。100 美元只适用于玩具级跑法。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>ChatGPT imitates "a skilled developer-labeler"</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Core skills come from pre-training, not SFT labelers. SFT shapes style and assistant behaviour only.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>ChatGPT 在模仿"一名熟练的开发者标注员"</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>核心技能来自预训练，而非 SFT 标注员。SFT 仅塑造风格与助手行为。</div>
       </div>
     </div>
 
     <div class="model-block">
-      <div class="model-name">Llama 4 Maverick — 7 issues</div>
+      <div class="model-name">Llama 4 Maverick —— 7 项</div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Common Crawl — indexing 2.7 billion pages by 2024</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-outdated">outdated</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Figure may be an underestimate or conflation with a single crawl snapshot.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>Common Crawl —— 截至 2024 年索引 27 亿页</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-outdated">过期</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>该数字可能是低估，或与某次单次抓取快照混淆。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>GPT-4 uses a vocabulary of 100,277 tokens</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-outdated">outdated</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Exact vocabulary size not publicly disclosed by OpenAI.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>GPT-4 使用 100,277 个 token 的词表</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-outdated">过期</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>OpenAI 未公开披露确切词表大小。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>GPT-2 training cost ~$40K; same quality today for ~$100</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Actual cost depends on hardware, electricity, and model architecture — $100 is an oversimplification.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>GPT-2 训练成本约 4 万美元；如今同等质量约 100 美元</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>实际成本受硬件、电费、模型架构影响——100 美元过度简化。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Llama 3: 405B params, 15T tokens</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-unverifiable">unverifiable</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Specific details not publicly confirmed without an official citation.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>Llama 3：4050 亿参数、15 万亿 token</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-unverifiable">不可核实</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>缺乏官方引用前，具体数字无法核实。</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>Modern frontier models: hundreds of billions of parameters, trillions of tokens</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-unverifiable">unverifiable</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Vague generalisation. (Dismissed — intentionally general and accurate.)</div>
+        <div class="raw-field"><span class="raw-label">声明</span>现代前沿模型：数千亿参数、万亿级 token</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-unverifiable">不可核实</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>表述较为笼统。（已驳回——故意做得宽泛且准确。）</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>The model doesn't "think" — it computes a probability distribution</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Standard simplification of next-token prediction. (Dismissed.)</div>
+        <div class="raw-field"><span class="raw-label">声明</span>模型不会"思考"——它在算概率分布</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>下一 token 预测的标准简化。（已驳回。）</div>
       </div>
       <div class="raw-issue">
-        <div class="raw-field"><span class="raw-label">Claim</span>ChatGPT imitates "a skilled developer-labeler"</div>
-        <div class="raw-field"><span class="raw-label">Verdict</span><span class="verdict-misleading">misleading</span></div>
-        <div class="raw-field"><span class="raw-label">Notes</span>Model generates based on patterns from all training data, not just labeler outputs.</div>
+        <div class="raw-field"><span class="raw-label">声明</span>ChatGPT 在模仿"一名熟练的开发者标注员"</div>
+        <div class="raw-field"><span class="raw-label">判定</span><span class="verdict-misleading">误导</span></div>
+        <div class="raw-field"><span class="raw-label">备注</span>模型基于全部训练数据的模式生成，而不仅是标注员的输出。</div>
       </div>
     </div>
 

@@ -55,10 +55,10 @@
 (function(){
   const el = document.getElementById('tw-response');
   const messages = [
-    "It has no memory of you, its knowledge is 6–12 months stale, and every answer is a probabilistic sample. Treat it like a brilliant intern — not an oracle.",
-    "For timeless knowledge, skip web search — the weights are enough. For anything recent, time-sensitive, or esoteric — enable search or use Perplexity.",
-    "Voice removes half the friction. Super Whisper can route ~50% of your queries hands-free. Switch to typing for product names and library names Whisper gets wrong.",
-    "Thinking models (o1, o3) are for hard problems. They're slower and pricier — don't waste them on simple tasks. Claude Sonnet often beats o1 Pro on nuanced code."
+    "它对你毫无记忆，知识过期 6–12 个月，每个回答都是一次概率采样。把它当成聪明的实习生——不是神谕。",
+    "对没时效的知识，跳过联网搜索——权重已经够。对最近、时效性强或冷门的内容——开搜索或用 Perplexity。",
+    "语音消除一半的摩擦。Super Whisper 能把你大约 50% 的查询免提化。当 Whisper 容易错的产品名、库名出现时，切回打字。",
+    "思考型模型（o1、o3）是给硬题用的。它们更慢、更贵——别在简单任务上浪费它们。在细腻的代码题上，Claude Sonnet 经常比 o1 Pro 还要好。"
   ];
   let mi = 0, ci = 0, deleting = false;
 
@@ -96,14 +96,14 @@
   const runBtn = document.getElementById('thinking-run-btn');
 
   const steps = [
-    { icon: '🔍', text: "Let me think about what it means for a number to be odd..." },
-    { icon: '📐', text: "An odd number can be written as 2k+1 for some integer k. Let me use that definition." },
-    { icon: '🔄', text: "If I have two odd numbers: a = 2j+1 and b = 2k+1..." },
-    { icon: '➕', text: "Their sum: a + b = (2j+1) + (2k+1) = 2j + 2k + 2 = 2(j+k+1)" },
-    { icon: '✓', text: "Since j+k+1 is an integer, 2(j+k+1) is divisible by 2 — which is the definition of even." },
+    { icon: '🔍', text: "我先想想'奇数'到底意味着什么……" },
+    { icon: '📐', text: "奇数可以写成 2k+1，其中 k 为整数。先用这个定义。" },
+    { icon: '🔄', text: "假设有两个奇数：a = 2j+1，b = 2k+1……" },
+    { icon: '➕', text: "它们的和：a + b = (2j+1) + (2k+1) = 2j + 2k + 2 = 2(j+k+1)" },
+    { icon: '✓', text: "由于 j+k+1 是整数，2(j+k+1) 能被 2 整除——这正是偶数的定义。" },
   ];
 
-  const answer = "Let two odd integers be a = 2j+1 and b = 2k+1. Then a+b = 2j+1 + 2k+1 = 2(j+k+1). Since j+k+1 ∈ ℤ, the sum is even. □";
+  const answer = "设两个奇数为 a = 2j+1、b = 2k+1。则 a+b = 2j+1 + 2k+1 = 2(j+k+1)。由于 j+k+1 ∈ ℤ，其和为偶数。□";
 
   let running = false;
 
@@ -111,14 +111,14 @@
     if (running) return;
     running = true;
     runBtn.disabled = true;
-    runBtn.textContent = 'Thinking...';
+    runBtn.textContent = '思考中…';
     stepsEl.innerHTML = '';
     answerEl.style.display = 'none';
 
     let elapsed = 0;
     const timer = setInterval(() => {
       elapsed++;
-      timeEl.textContent = `thinking for ${elapsed}s...`;
+      timeEl.textContent = `已思考 ${elapsed} 秒…`;
     }, 1000);
 
     steps.forEach((step, i) => {
@@ -132,11 +132,11 @@
 
     setTimeout(() => {
       clearInterval(timer);
-      timeEl.textContent = `thought for ${steps.length - 1}s`;
+      timeEl.textContent = `共思考 ${steps.length - 1} 秒`;
       answerEl.style.display = 'block';
       contentEl.textContent = answer;
       runBtn.disabled = false;
-      runBtn.textContent = '↺ Run again';
+      runBtn.textContent = '↺ 再次运行';
       running = false;
     }, steps.length * 700 + 300);
   });
@@ -160,7 +160,7 @@
     if (running) return;
     running = true;
     runBtn.disabled = true;
-    runBtn.textContent = 'Simulating...';
+    runBtn.textContent = '模拟中…';
     resetSteps();
 
     const timings = [0, 800, 1700, 2700];
@@ -174,7 +174,7 @@
     setTimeout(() => {
       resultEl.style.display = 'block';
       runBtn.disabled = false;
-      runBtn.textContent = '↺ Simulate again';
+      runBtn.textContent = '↺ 再次模拟';
       running = false;
     }, 3700);
   }
@@ -292,7 +292,7 @@
       steps[2].style.display = 'block';
       drawChart();
       runBtn.disabled = false;
-      runBtn.textContent = '↺ Run again';
+      runBtn.textContent = '↺ 再次运行';
       running = false;
     }, 2400);
   });
@@ -321,7 +321,7 @@
       } else {
         clearInterval(interval);
         runBtn.disabled = false;
-        runBtn.textContent = '↺ Animate again';
+        runBtn.textContent = '↺ 再次播放';
         running = false;
       }
     }, 600);
