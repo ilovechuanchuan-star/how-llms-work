@@ -72,7 +72,7 @@
     <div class="col-text fade-up">
       <div class="chapter-badge" aria-hidden="true">第 1 章 · 预训练 · 阶段 1</div>
       <h2 class="section-title">下载<br>整个互联网</h2>
-      <p class="body-text">第一步是收集海量的文本。<span class="highlight">Common Crawl</span> 这类机构自 2007 年起就在持续抓取网页——到 2024 年已索引了 27 亿个页面。这些原始数据再被过滤为像 <span class="highlight">FineWeb</span> 这样的高质量数据集。</p>
+      <p class="body-text">第一步是收集海量的文本。<span class="highlight">Common Crawl</span> 这类机构自 2007 年起就在持续抓取网页——单次月度抓取约含 27 亿网页（2024 年量级），自 2007 年以来的累计存档则远大于此。这些原始数据再被过滤为像 <span class="highlight">FineWeb</span> 这样的高质量数据集。</p>
       <p class="body-text">目标是：<em>大量</em>、<em>高质量</em>且<em>多样化</em>的文档。经过激进的过滤后，最终大约剩下 <span class="highlight-a">44 TB</span>——相当于 10 块消费级硬盘的文本——约对应 15 万亿 token。</p>
       <div class="insight-box">
         <strong>核心洞察</strong>
@@ -137,7 +137,7 @@
         <div class="chapter-badge">第 1 章 · 预训练 · 阶段 2</div>
         <h2 class="section-title">分词（Tokenization）</h2>
         <p class="body-text">神经网络无法直接处理原始文本——它需要数字。解决办法就是 <span class="highlight">分词</span>：把文本切分成 token（子词块），并为每个 token 分配一个 ID。</p>
-        <p class="body-text">GPT-4 使用一个 <span class="highlight">100,277 个 token</span> 的词表，通过 <span class="highlight-a">字节对编码（BPE）</span>算法构建。BPE 从单个字节（256 个符号）开始，反复合并出现频率最高的相邻字节对——在压缩序列长度的同时扩展词表。</p>
+        <p class="body-text">GPT-4 时代常见的 OpenAI 分词器（如 <span class="highlight">cl100k_base</span>，约 10 万 token 量级）通过 <span class="highlight-a">字节对编码（BPE）</span>算法构建；GPT-4 自身的官方词表大小并未公开确认。BPE 从单个字节（256 个符号）开始，反复合并出现频率最高的相邻字节对——在压缩序列长度的同时扩展词表。</p>
         <div class="insight-box">
           <strong>为什么不直接用单词？</strong>
           单词的变体是无穷的。"run"、"running"、"runner" 会变成 3 个独立条目。子词 token 共享词根："run" + "ning"、"run" + "ner"。这样还能高效处理新词、拼写错误以及多种语言。
@@ -170,7 +170,7 @@
         <p class="body-text"><span class="highlight">loss</span>——一个度量预测误差的单一数值——会随着模型不断学习人类语言的统计规律而稳步下降。</p>
         <div class="insight-box">
           <strong>规模</strong>
-          GPT-2（2019 年）：16 亿参数，1000 亿 token，训练约 4 万美元。今天：同等质量大约只需 100 美元。Llama 3：4050 亿参数，15 万亿 token。现代前沿模型：数千亿参数、万亿级 token。
+          GPT-2（2019 年）：16 亿参数，约 1000 亿 token 训练规模，原训练约 4 万美元。今天：在小规模/教学级复现（例如 nanoGPT 风格）下成本可低至约 100 美元，但要真正复刻完整 GPT-2 质量仍需数千美元起。Llama 3：4050 亿参数，15 万亿 token。现代前沿模型：数千亿参数、万亿级 token。
         </div>
         <div class="insight-box" style="margin-top:14px">
           <strong>缩放定律（Scaling Laws）</strong>
@@ -182,7 +182,7 @@
         <svg id="transformer-svg" viewBox="0 0 360 340" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block;margin-bottom:16px" role="img" aria-label="Transformer 架构示意图，展示数据从输入 token 经过 embedding、attention 和前馈层最终输出 logits 的流向"><title>Transformer 架构</title></svg>
         <div class="insight-box">
           <strong>什么是 Embedding？</strong>
-          每个 token ID 会映射到一个学习得到的、约 1,000–4,000 维的向量，称作它的 <em>embedding</em>。可以把它理解为意义空间中的一个坐标——初始随机，再由训练塑形。同一个 token（比如 "bank"）总是以同一个 embedding 向量进入网络。<em>注意力层（attention）</em>随后会把上下文 token 的信息混入其中，所以当 "bank" 流到更深层时，"river bank（河岸）"和 "bank account（银行账户）"会带有完全不同的表示。一词多义是靠上下文消解的，而不是给一个 token 存多个含义。
+          每个 token ID 会映射到一个学习得到的高维向量，称作它的 <em>embedding</em>，维度从数千到上万不等，具体取决于模型规模。可以把它理解为意义空间中的一个坐标——初始随机，再由训练塑形。同一个 token（比如 "bank"）总是以同一个 embedding 向量进入网络。<em>注意力层（attention）</em>随后会把上下文 token 的信息混入其中，所以当 "bank" 流到更深层时，"river bank（河岸）"和 "bank account（银行账户）"会带有完全不同的表示。一词多义是靠上下文消解的，而不是给一个 token 存多个含义。
         </div>
       </div>
     </div>
@@ -265,7 +265,7 @@
         <h2 class="section-title">互联网<br>模拟器</h2>
         <p class="body-text">预训练完成后，你得到的是一个<span class="highlight">基础模型</span>——一个高级的自动补全引擎。它不是助手，不会答问题。它只会基于在互联网上看到的内容<em>把 token 序列接着写下去</em>。</p>
         <p class="body-text">给它一句维基百科的话，它会凭记忆补全。问它"2+2 等于几？"，它可能给你一页数学课本、一份测试答案，或干脆扯到别处去——取决于训练数据里这种问句之后统计上最常出现的延续是什么。</p>
-        <p class="body-text">基础模型的知识存放在它的 <span class="highlight-a">4050 亿个参数</span>里——一份对互联网的有损压缩，类似一个"近似而非精确"地存储信息的 zip 文件。</p>
+        <p class="body-text">基础模型的知识存放在它的 <span class="highlight-a">4050 亿个参数</span>里——一份对互联网的有损压缩，类似一个"近似而非精确"地存储信息的 ZIP 文件。</p>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
         <h3 class="sub-title" style="margin-bottom:14px">基础模型行为</h3>
@@ -330,7 +330,7 @@
         </div>
         <div class="insight-box" style="margin-top:16px">
           <strong>你究竟在跟谁对话</strong>
-          ChatGPT 是 OpenAI 雇佣的人类标注员的统计模拟——这些标注员是按照标注规范作答的专家。当它回答一个编程问题时，它在模仿一名熟练的开发者标注员会怎么写。
+          后训练（SFT）的作用是把基础模型塑造成"按规范回答的助手"——风格、格式、对话习惯主要在这一步成型。但底层的知识与编码能力主要来自预训练；标注员并不是从零教模型如何写代码，而是引导它何时、以何种方式作答。
         </div>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
@@ -359,7 +359,7 @@
         </div>
         <div class="insight-box">
           <strong>为什么 RLHF 重要</strong>
-          SFT 教会模型说什么，RLHF 教它<em>怎么说得好</em>——让回答更有用、更有结构、更诚实，也更不容易胡编。
+          SFT 教会模型说什么，RLHF 教它<em>怎么说得更符合人类偏好</em>——更有用、更有结构。需要注意的是：RLHF 优化的是被偏好的回答，不直接优化"真实性"，有时甚至会强化谄媚或幻觉。
         </div>
       </div>
     </div>
@@ -581,7 +581,7 @@
         <div class="ps-content" style="border-left:3px solid var(--cyan)">
           <div class="ps-title" style="color:var(--cyan)">数据采集</div>
           <div class="ps-desc">Common Crawl 与其他来源 → URL 过滤 → 文本提取 → 语言过滤 → 去重 → PII 移除 → 44 TB 精选文本（FineWeb 等）</div>
-          <div class="ps-tags"><span class="tag tag-c">Common Crawl</span><span class="tag tag-c">FineWeb</span><span class="tag tag-c">44 TB</span><span class="tag tag-c">15T tokens</span></div>
+          <div class="ps-tags"><span class="tag tag-c">Common Crawl</span><span class="tag tag-c">FineWeb</span><span class="tag tag-c">44 TB</span><span class="tag tag-c">15 万亿 token</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
