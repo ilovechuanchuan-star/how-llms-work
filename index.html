@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="glossary.css">
 </head>
 <body>
 <a href="#main-content" class="skip-link">跳转到主要内容</a>
@@ -136,16 +137,16 @@
       <div class="fade-up">
         <div class="chapter-badge">第 1 章 · 预训练 · 阶段 2</div>
         <h2 class="section-title">分词（Tokenization）</h2>
-        <p class="body-text">神经网络无法直接处理原始文本——它需要数字。解决办法就是 <span class="highlight">分词</span>：把文本切分成 token（子词块），并为每个 token 分配一个 ID。</p>
+        <p class="body-text">神经网络无法直接处理原始文本——它需要数字。解决办法就是 <span class="highlight">分词</span>：把文本切分成 token（词元），并为每个 token 分配一个 ID。</p>
         <p class="body-text">GPT-4 时代常见的 OpenAI 分词器（如 <span class="highlight">cl100k_base</span>，约 10 万 token 量级）通过 <span class="highlight-a">字节对编码（BPE）</span>算法构建；GPT-4 自身的官方词表大小并未公开确认。BPE 从单个字节（256 个符号）开始，反复合并出现频率最高的相邻字节对——在压缩序列长度的同时扩展词表。</p>
         <div class="insight-box">
           <strong>为什么不直接用单词？</strong>
-          单词的变体是无穷的。"run"、"running"、"runner" 会变成 3 个独立条目。子词 token 共享词根："run" + "ning"、"run" + "ner"。这样还能高效处理新词、拼写错误以及多种语言。
+          单词的变体是无穷的。"run"、"running"、"runner" 会变成 3 个独立条目。词元 token 共享词根："run" + "ning"、"run" + "ner"。这样还能高效处理新词、拼写错误以及多种语言。
         </div>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
         <h3 class="sub-title">BPE 实战演示</h3>
-        <svg id="bpe-svg" viewBox="0 0 380 280" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block" role="img" aria-labelledby="bpe-title" aria-describedby="bpe-desc"><title id="bpe-title">BPE 分词步骤</title><desc id="bpe-desc">交互式示意图，展示字节对编码如何逐步合并字符为子词 token</desc></svg>
+        <svg id="bpe-svg" viewBox="0 0 380 280" width="100%" style="background:var(--card);border:1px solid var(--border);border-radius:10px;display:block" role="img" aria-labelledby="bpe-title" aria-describedby="bpe-desc"><title id="bpe-title">BPE 分词步骤</title><desc id="bpe-desc">交互式示意图，展示字节对编码如何逐步合并字符为词元 token</desc></svg>
         <div style="margin-top:10px;display:flex;align-items:center;gap:12px">
           <button class="btn btn-ghost btn-sm" id="bpe-advance-btn" aria-label="前进到下一个 BPE 步骤">下一步 →</button>
           <span id="bpe-step-label" style="font-family:var(--dm);font-size:11px;color:var(--txt2)">第 1 步，共 5 步</span>
@@ -589,8 +590,8 @@
         <div class="ps-num">02</div>
         <div class="ps-content" style="border-left:3px solid var(--amber)">
           <div class="ps-title" style="color:var(--amber)">分词（Tokenization）</div>
-          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是一个带整数 ID 的子词块。GPT-4 词表：100,277 个 token。</div>
-          <div class="ps-tags"><span class="tag tag-a">BPE</span><span class="tag tag-a">100K 词表</span><span class="tag tag-a">子词单元</span></div>
+          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是一个带整数 ID 的词元。GPT-4 词表：100,277 个 token。</div>
+          <div class="ps-tags"><span class="tag tag-a">BPE</span><span class="tag tag-a">100K 词表</span><span class="tag tag-a">词元单元</span></div>
         </div>
       </div>
       <div class="pipeline-connector"></div>
@@ -687,5 +688,6 @@
 </section>
 
 <script src="main.js"></script>
+<script src="glossary.js"></script>
 </body>
 </html>

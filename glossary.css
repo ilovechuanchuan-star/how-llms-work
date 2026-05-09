@@ -1,0 +1,65 @@
+/* ── Glossary tooltip ── */
+.glossary-term{
+  position:relative;
+  border-bottom:1px dashed rgba(99,91,255,0.55);
+  cursor:help;
+  color:inherit;
+}
+.glossary-term:hover,
+.glossary-term:focus-visible{
+  border-bottom-color:var(--accent);
+  background:rgba(99,91,255,0.06);
+  border-radius:2px;
+}
+.glossary-term:focus-visible{outline:none;box-shadow:0 0 0 2px var(--accent-d)}
+
+#glossary-pop{
+  position:absolute;
+  z-index:1000;
+  max-width:320px;
+  background:var(--card);
+  color:var(--txt-b);
+  border:1px solid var(--border-b);
+  border-radius:var(--radius-sm);
+  box-shadow:var(--shadow-md);
+  padding:10px 12px;
+  font-family:var(--db);
+  font-size:13px;
+  line-height:1.55;
+  pointer-events:auto;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .12s ease,transform .12s ease;
+  visibility:hidden;
+}
+#glossary-pop.show{opacity:1;transform:translateY(0);visibility:visible}
+#glossary-pop .gp-term{
+  font-family:var(--ds);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+#glossary-pop .gp-full{
+  font-size:12px;
+  color:var(--txt2);
+  margin-bottom:6px;
+  font-style:italic;
+}
+#glossary-pop .gp-desc{color:var(--txt)}
+#glossary-pop::after{
+  content:'';
+  position:absolute;
+  width:8px;height:8px;
+  background:var(--card);
+  border-left:1px solid var(--border-b);
+  border-top:1px solid var(--border-b);
+  transform:rotate(45deg);
+  top:-5px;left:16px;
+}
+#glossary-pop.below::after{top:auto;bottom:-5px;border:none;border-right:1px solid var(--border-b);border-bottom:1px solid var(--border-b)}
+
+@media (max-width:640px){
+  #glossary-pop{max-width:calc(100vw - 32px)}
+}
