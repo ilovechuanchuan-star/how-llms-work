@@ -69,6 +69,9 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.75;margin-bottom:16p
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
 .insight-box{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:16px 20px;margin-top:20px;font-size:14px;color:var(--txt);font-family:var(--db);border-radius:0 var(--radius) var(--radius) 0}
 .insight-box strong{color:var(--accent);font-family:var(--ds);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px}
+.fact-note{display:block;margin:10px 0 16px;padding:10px 13px;background:var(--red-d);border:1px solid rgba(223,27,65,0.22);border-left:3px solid var(--red);border-radius:0 var(--radius-sm) var(--radius-sm) 0;color:var(--red);font-family:var(--db);font-size:13px;line-height:1.55}
+.fact-note strong{font-family:var(--ds);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-right:6px;color:var(--red)}
+.fact-note a{color:var(--red);text-decoration:underline;text-underline-offset:2px}
 
 /* ── Tags ── */
 .tag{font-family:var(--ds);font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:100px;border:1px solid;display:inline-flex;align-items:center}

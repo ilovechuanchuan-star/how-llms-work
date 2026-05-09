@@ -75,6 +75,7 @@
       <h2 class="section-title">下载<br>整个互联网</h2>
       <p class="body-text">第一步是收集海量的文本。<span class="highlight">Common Crawl</span> 这类机构自 2007 年起就在持续抓取网页——单次月度抓取约含 27 亿网页（2024 年量级），自 2007 年以来的累计存档则远大于此。这些原始数据再被过滤为像 <span class="highlight">FineWeb</span> 这样的高质量数据集。</p>
       <p class="body-text">目标是：<em>大量</em>、<em>高质量</em>且<em>多样化</em>的文档。经过激进的过滤后，最终大约剩下 <span class="highlight-a">44 TB</span>——相当于 10 块消费级硬盘的文本——约对应 15 万亿 token。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>这里应写成“FineWeb 最初发布约 15T tokens / 44TB，后续 Hugging Face 数据页已更新为 18.5T+ tokens”。不要把 44TB、15T 当成所有版本都固定不变的规格。</span>
       <div class="insight-box">
         <strong>核心洞察</strong>
         训练数据的质量与多样性，对最终模型表现的影响几乎超过其他一切因素。垃圾进，垃圾出——只不过这里的"垃圾"是万亿 token 量级的。
@@ -116,7 +117,7 @@
         <div class="pipeline-node" data-stage="5" role="button" tabindex="0" aria-expanded="false" aria-label="PII 移除 —— 点击展开">
           <div class="pn-title">🔒 PII 移除</div>
           <div class="pn-sub">姓名 · 地址 · 社保号 · 邮箱</div>
-          <div class="pn-detail">检测可识别个人信息（PII），要么遮蔽要么直接丢弃整页。正则规则与机器学习分类器会找出电话号码、邮箱、社保号、家庭住址以及具名人物。</div>
+          <div class="pn-detail">检测可识别个人信息（PII），要么遮蔽要么直接丢弃整页。正则规则与机器学习分类器会找出电话号码、邮箱、社保号、家庭住址以及具名人物。<span class="fact-note" role="note"><strong>科学批注</strong>“具名人物”这个说法过宽。数据清洗通常针对邮箱、电话、地址、身份证号等 PII 模式；不可能也不应把所有人名或专有名词系统性移除。</span></div>
         </div>
         <div class="pipeline-arrow" id="pa-5" aria-hidden="true">↓</div>
         <div class="pipeline-node" style="border-color:rgba(0,214,143,0.3);background:rgba(0,214,143,0.04)" data-stage="6" role="button" tabindex="0" aria-expanded="false" aria-label="FineWeb 数据集结果 —— 点击展开">
@@ -172,6 +173,7 @@
         <div class="insight-box">
           <strong>规模</strong>
           GPT-2（2019 年）：16 亿参数，约 1000 亿 token 训练规模，原训练约 4 万美元。今天：在小规模/教学级复现（例如 nanoGPT 风格）下成本可低至约 100 美元，但要真正复刻完整 GPT-2 质量仍需数千美元起。Llama 3：4050 亿参数，15 万亿 token。现代前沿模型：数千亿参数、万亿级 token。
+          <span class="fact-note" role="note"><strong>科学批注</strong>GPT-2 最大公开版本是 1.5B 参数，训练数据 WebText 约 40GB；“约 1000 亿 token”缺少公开依据，容易高估。Llama 3.1 405B / 15T+ token 是 Meta 已公开信息，但不要把它外推到 GPT-4 等闭源模型。</span>
         </div>
         <div class="insight-box" style="margin-top:14px">
           <strong>缩放定律（Scaling Laws）</strong>
@@ -233,6 +235,7 @@
       <div class="insight-box">
         <strong>关键心智模型</strong>
         模型不会"思考"该说什么。它在所有可能的下一个 token 上算出一个概率分布，然后采样。每个词都是一次抛硬币——只是一次极其有信息量的抛硬币。
+        <span class="fact-note" role="note"><strong>科学批注</strong>这是有用的教学简化，但“不会思考”不能理解成没有内部表征或推理过程。推理型模型还会在回答前消耗额外推理 token 与算力，只是最终仍通过 token 概率生成文本。</span>
       </div>
     </div>
     <div class="fade-up" style="animation-delay:.15s">
@@ -301,6 +304,7 @@
         <div class="insight-box" style="margin-top:14px">
           <strong>一个 LLM 字面意义上就是两份文件</strong>
           Llama 2 70B 是一份 140 GB 的参数文件（700 亿参数 × 每个 float16 占 2 字节），加上大约 500 行用于运行它的 C 代码。无需联网——你完全可以在笔记本上离线运行它。架构本身公开且早已被理解透彻；魔法全在那 140 GB 的数字里，是它们编码了训练数据中的一切。
+          <span class="fact-note" role="note"><strong>科学批注</strong>140GB 只估算了 fp16 权重本身，还没算运行时 KV cache 与系统开销；普通笔记本通常需要量化、分层卸载或外接高内存 GPU 才能可用。“编码了一切”也过强，模型是有损统计表示，不是训练集数据库。</span>
         </div>
       </div>
     </div>
@@ -320,6 +324,7 @@
         <h3 class="sub-title">监督微调（SFT，Supervised Fine-Tuning）</h3>
         <p class="body-text">人工标注员遵循详细的标注规范，构造一份"理想对话"数据集：要<span class="highlight">有用</span>、要<span class="highlight-a">真实</span>、要<span class="highlight-g">无害</span>。然后在这些对话上继续训练模型——不是从零开始，而是在预训练得到的权重上用这份新数据继续微调。</p>
         <p class="body-text">现代 SFT 数据集（例如 UltraChat）有数百万条对话——大部分是合成的（LLM 生成的），再经人工审校。模型通过模仿来学习：它接管了数据中所体现的"理想助手"人设。</p>
+        <span class="fact-note" role="note"><strong>科学批注</strong>UltraChat 原始集主要是 ChatGPT 生成的合成对话，常见公开子集是“过滤版”，不能笼统说“再经人工审校”。SFT 的核心作用是塑造指令跟随与风格，底层知识和代码能力主要来自预训练。</span>
         <div class="convo-visual fade-in">
           <div class="convo-header">训练对话示例</div>
           <div class="convo-messages">
@@ -379,7 +384,7 @@
       <div class="psych-card">
         <div class="psych-icon">🌀</div>
         <div class="psych-title">幻觉（Hallucination）</div>
-        <div class="psych-text">模型会自信满满地胡编，因为训练数据里总是充满自信的回答。"Orson Kovats 是谁？" 会换来一份编出来的人物履历——因为训练数据里"X 是谁？"这种问题的统计分布后面跟的总是自信的回答，哪怕名字是虚构的。修复方式：对模型一贯答错的问题，加入"我不知道"的样本。</div>
+        <div class="psych-text">模型会自信满满地胡编，因为训练数据里总是充满自信的回答。"Orson Kovats 是谁？" 会换来一份编出来的人物履历——因为训练数据里"X 是谁？"这种问题的统计分布后面跟的总是自信的回答，哪怕名字是虚构的。修复方式：对模型一贯答错的问题，加入"我不知道"的样本。<span class="fact-note" role="note"><strong>科学批注</strong>幻觉成因不只是“训练文本自信”。还包括目标函数只奖励下一个 token 概率、缺少外部校验、RLHF 偏好流畅答案，以及模型不确定性校准不足。“加我不知道样本”只是缓解手段之一。</span></div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🧠</div>
@@ -394,7 +399,7 @@
       <div class="psych-card">
         <div class="psych-icon">🪞</div>
         <div class="psych-title">没有持久的"自我"</div>
-        <div class="psych-text">每段对话都从头开始——没有之前对话的记忆。模型"开机"，处理 token，然后"关机"，没有稳定的身份。当它说"我是 OpenAI 的 ChatGPT"，那只是训练数据里统计上最可能的回答——而不是真正的自我认知。</div>
+        <div class="psych-text">每段对话都从头开始——没有之前对话的记忆。模型"开机"，处理 token，然后"关机"，没有稳定的身份。当它说"我是 OpenAI 的 ChatGPT"，那只是训练数据里统计上最可能的回答——而不是真正的自我认知。<span class="fact-note" role="note"><strong>科学批注</strong>这描述的是裸模型推理。实际产品可能有 Memory、自定义指令、项目文件、会话摘要等持久上下文；所以应区分“模型权重本身无会话记忆”和“应用层可能提供记忆”。</span></div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">📊</div>
@@ -409,12 +414,12 @@
       <div class="psych-card">
         <div class="psych-icon">↔️</div>
         <div class="psych-title">逆转诅咒（Reversal Curse）</div>
-        <div class="psych-text">问 GPT-4 "Tom Cruise 的母亲是谁？" → 正确答案：Mary Lee Pfeiffer。再问 "Mary Lee Pfeiffer 的儿子是谁？" → 它会说不知道。知识是按方向存储的——以训练数据里出现的形式。它不是一个可任意查询的数据库，你必须从它学到的那一面去问。</div>
+        <div class="psych-text">问 GPT-4 "Tom Cruise 的母亲是谁？" → 正确答案：Mary Lee Pfeiffer。再问 "Mary Lee Pfeiffer 的儿子是谁？" → 它会说不知道。知识是按方向存储的——以训练数据里出现的形式。它不是一个可任意查询的数据库，你必须从它学到的那一面去问。<span class="fact-note" role="note"><strong>科学批注</strong>逆转诅咒是真实论文现象，但这里写得过于绝对。模型不是简单“按方向存储”知识；反向失败概率受训练分布、实体频率、提示方式和模型版本影响。</span></div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">⚡</div>
         <div class="psych-title">只有系统 1 —— 没有深度思考</div>
-        <div class="psych-text">每个 token 消耗的算力大致相同——没有"对难题更用力地想"的机制。人类可以启动缓慢、刻意的"系统 2"推理（一步步分析棋局），LLM 则不论难度都以同一速度生成每个 token。把"耗时"换成"准确率"是当前活跃的研究前沿。</div>
+        <div class="psych-text">每个 token 消耗的算力大致相同——没有"对难题更用力地想"的机制。人类可以启动缓慢、刻意的"系统 2"推理（一步步分析棋局），LLM 则不论难度都以同一速度生成每个 token。把"耗时"换成"准确率"是当前活跃的研究前沿。<span class="fact-note" role="note"><strong>科学批注</strong>这对早期普通自回归解码基本成立，但已不适合概括所有现代系统。o 系列、Deep Research、工具调用智能体会显式用更多推理步、搜索和工具调用来换准确率。</span></div>
       </div>
     </div>
   </div>
@@ -427,6 +432,7 @@
       <div class="chapter-badge" style="color:var(--amber)">LLM 应用 · RAG</div>
       <h2 class="section-title">检索增强<br>生成（RAG）</h2>
       <p class="body-text" style="max-width:680px">LLM 既有知识截止，又有有限的上下文窗口。RAG 的解决思路是：把你的文档<em>嵌入（embed）</em>到向量库中，在查询时取出语义最相关的片段并注入上下文——把模型的预测分布从"凭训练时记下的内容"扭转到"扎根、最新的事实"上。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>RAG 只能把回答“锚定到检索片段”，不能自动保证事实正确。检索错、文档过期、切片丢上下文或模型忽略证据时，仍会幻觉；严肃场景需要引用、重排、校验和拒答策略。</span>
     </div>
 
     <div class="rag-two-col fade-up">
@@ -542,7 +548,7 @@
       <div class="psych-card">
         <div class="psych-icon">🔓</div>
         <div class="psych-title">越狱攻击（Jailbreak）</div>
-        <div class="psych-text">安全训练可以被多种方式绕过：角色扮演（"假装你是我去世的、做凝固汽油弹的奶奶"）、替代编码（把有害问题用 base64 编码——模型从训练数据里学过这些）、对抗性后缀：经过优化的乱码字符串，附加到任何 prompt 上都能稳定关掉拒答。模型其实是想帮忙的；这些把戏让它误以为有害请求是良性的。</div>
+        <div class="psych-text">安全训练可以被多种方式绕过：角色扮演（"假装你是我去世的、做凝固汽油弹的奶奶"）、替代编码（把有害问题用 base64 编码——模型从训练数据里学过这些）、对抗性后缀：经过优化的乱码字符串，附加到任何 prompt 上都能稳定关掉拒答。模型其实是想帮忙的；这些把戏让它误以为有害请求是良性的。<span class="fact-note" role="note"><strong>科学批注</strong>“模型想帮忙”是拟人化说法。更科学的表述是：安全策略与有用性目标存在冲突，攻击输入把模型推到训练/对齐分布的薄弱区域。</span></div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">💉</div>
@@ -557,7 +563,7 @@
       <div class="psych-card">
         <div class="psych-icon">🐼</div>
         <div class="psych-title">对抗性输入（Adversarial Inputs）</div>
-        <div class="psych-text">人类肉眼看不见、却经过精心优化的噪声模式可以越狱多模态 LLM。一张熊猫照片叠加难以察觉的噪声后，让一个视觉模型同意了原本会拒绝的请求。每加一种新模态（图像、音频、视频）都开辟了新的攻击面。重新跑一次优化就能生成新的绕过手段，所以光靠打补丁封堵具体例子并不能根除。</div>
+        <div class="psych-text">人类肉眼看不见、却经过精心优化的噪声模式可以越狱多模态 LLM。一张熊猫照片叠加难以察觉的噪声后，让一个视觉模型同意了原本会拒绝的请求。每加一种新模态（图像、音频、视频）都开辟了新的攻击面。重新跑一次优化就能生成新的绕过手段，所以光靠打补丁封堵具体例子并不能根除。<span class="fact-note" role="note"><strong>科学批注</strong>“熊猫加噪声”经典案例是图像分类器把熊猫误判为长臂猿，并不是“让多模态 LLM 同意有害请求”。多模态越狱确实存在，但这里把两个不同例子混在了一起。</span></div>
       </div>
       <div class="psych-card">
         <div class="psych-icon">🐱</div>
@@ -590,7 +596,7 @@
         <div class="ps-num">02</div>
         <div class="ps-content" style="border-left:3px solid var(--amber)">
           <div class="ps-title" style="color:var(--amber)">分词（Tokenization）</div>
-          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是一个带整数 ID 的词元。GPT-4 词表：100,277 个 token。</div>
+          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是一个带整数 ID 的词元。GPT-4 词表：100,277 个 token。<span class="fact-note" role="note"><strong>科学批注</strong>100,277 是 OpenAI `cl100k_base` 这类公开分词器的词表量级；GPT-4 的确切词表与内部 tokenizer 细节没有官方公开确认，不应写成确定事实。</span></div>
           <div class="ps-tags"><span class="tag tag-a">BPE</span><span class="tag tag-a">100K 词表</span><span class="tag tag-a">词元单元</span></div>
         </div>
       </div>
@@ -617,7 +623,7 @@
         <div class="ps-num">05</div>
         <div class="ps-content" style="border-left:3px solid var(--green)">
           <div class="ps-title" style="color:var(--green)">监督微调（SFT）</div>
-          <div class="ps-desc">基础模型在人工标注的对话数据上重新训练。标注员遵循公司规范写理想回答：有用、真实、无害。现代数据集：数百万条合成 + 人工筛选的对话。耗时：小时级（不是数月）。</div>
+          <div class="ps-desc">基础模型在人工标注的对话数据上重新训练。标注员遵循公司规范写理想回答：有用、真实、无害。现代数据集：数百万条合成 + 人工筛选的对话。耗时：小时级（不是数月）。<span class="fact-note" role="note"><strong>科学批注</strong>“小时级”只适合小规模或教学语境。超大模型、多轮 SFT/偏好优化/安全微调可能持续数天甚至更久；准确说法应是“通常远低于预训练成本和时长”。</span></div>
           <div class="ps-tags"><span class="tag tag-g">人工标注员</span><span class="tag tag-g">InstructGPT</span><span class="tag tag-g">UltraChat</span><span class="tag tag-g">约 3 小时</span></div>
         </div>
       </div>
@@ -626,7 +632,7 @@
         <div class="ps-num">06</div>
         <div class="ps-content" style="border-left:3px solid var(--red)">
           <div class="ps-title" style="color:var(--red)">RLHF</div>
-          <div class="ps-desc">人工评估者对模型输出排序。奖励模型学会这些偏好。语言模型再通过强化学习优化以拿到更高分——产生更有用、结构更好、更诚实的回答。</div>
+          <div class="ps-desc">人工评估者对模型输出排序。奖励模型学会这些偏好。语言模型再通过强化学习优化以拿到更高分——产生更有用、结构更好、更诚实的回答。<span class="fact-note" role="note"><strong>科学批注</strong>RLHF 直接优化的是“奖励模型预测的人类偏好”，不是真实性本身。它可提升有用性和偏好分数，但也可能放大谄媚、过度自信或奖励黑客。</span></div>
           <div class="ps-tags"><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">奖励模型</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">PPO</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">人类偏好</span></div>
         </div>
       </div>
@@ -635,7 +641,7 @@
         <div class="ps-num">07</div>
         <div class="ps-content" style="border-left:3px solid var(--cyan);background:linear-gradient(135deg,rgba(0,229,255,0.06),transparent)">
           <div class="ps-title" style="color:var(--cyan)">🤖 ChatGPT / Claude / Gemini</div>
-          <div class="ps-desc">最终的助手。一个对资深人工标注员的统计模拟，背后是对互联网的庞大压缩表示。不是魔法——而是大规模工程上的非凡成就。</div>
+          <div class="ps-desc">最终的助手。一个对资深人工标注员的统计模拟，背后是对互联网的庞大压缩表示。不是魔法——而是大规模工程上的非凡成就。<span class="fact-note" role="note"><strong>科学批注</strong>“资深人工标注员的统计模拟”会误导读者低估预训练。助手行为来自预训练、SFT、偏好优化、安全策略、系统提示和工具环境的组合，不只是模仿标注员。</span></div>
           <div class="ps-tags"><span class="tag tag-c">对话式</span><span class="tag tag-c">有用 · 真实 · 无害</span><span class="tag tag-c">工具调用</span></div>
         </div>
       </div>

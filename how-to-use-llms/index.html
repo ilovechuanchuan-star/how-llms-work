@@ -73,6 +73,7 @@
       <div class="chapter-badge">第 1 章 · 基础</div>
       <h2 class="section-title">你正在和<br><span>一个 ZIP 文件</span>对话</h2>
       <p class="body-text">Karpathy 的心智模型：ChatGPT 是一个<span class="highlight">"单标签页 ZIP 文件"</span>——一份对互联网的高度压缩快照。它读过截至训练截止日期之前几乎所有的网页、书籍和文档，那个截止日期通常在 6–12 个月前。它返回的是对那份数据的概率性回忆。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>“几乎所有网页、书籍和文档”是夸张心智模型，不是事实描述；训练语料只覆盖可获取、可许可、可清洗的一部分文本。知识截止也不一定固定为 6–12 个月，取决于具体模型、产品和是否接入检索工具。</span>
       <p class="body-text"><span class="highlight">上下文窗口</span>是它的工作记忆——一段它当前能看到的、容量有限的 token 磁带。在里面的内容可以直接访问；不在里面的内容对这次对话来说就不存在。会话之间默认没有持久记忆，除非你显式开启。</p>
       <p class="body-text">默认情况下它没有联网通道。模型只是在算"你的 prompt 接下来统计上最可能的延续"——这不是查询，不是搜索，也不是保证。</p>
       <div class="insight-box">
@@ -185,10 +186,12 @@
           </div>
         </div>
       </div>
+      <span class="fact-note" role="note"><strong>科学批注</strong>这一整组模型与套餐名称具有强时效性。到 2026 年再读时，GPT-4o、o1/o3、Claude 3.7、Gemini 2.0 Pro 等可能已不是默认或最新模型；此处应标注“讲座当时的生态快照”，不能当作当前选型建议。</span>
     </div>
     <div class="insight-box fade-up" style="animation-delay:.3s;margin-top:20px">
       <strong>到哪里对比</strong>
       <a href="https://lmarena.ai" target="_blank" rel="noopener" style="color:var(--accent)">LM Arena (lmarena.ai)</a>——前身为 Chatbot Arena——维护一份基于人类偏好投票的实时排行榜。它是判断"当前哪个模型真的更好"最可靠的信号。
+      <span class="fact-note" role="note"><strong>科学批注</strong>LM Arena 是很有价值的公开偏好信号，但“最可靠”过强。Arena 分数受用户群体、提示分布、匿名/非匿名设置、风格偏好和安全拒答策略影响；工程选型仍应结合任务基准、成本、延迟和隐私要求。</span>
     </div>
   </div>
 </section>
@@ -200,6 +203,7 @@
       <div class="chapter-badge">第 3 章 · 推理</div>
       <h2 class="section-title">思考型<br><span>模型</span></h2>
       <p class="body-text">OpenAI 的 <span class="highlight">o1、o1 Pro、o3、o3-mini</span> 是另一类——所有以 "o" 开头的模型都属于思考型模型。在给出回答前，它们会跑一段较长的内在独白：尝试不同思路、回溯、再试别的方案。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>把推理模型说成“内在独白”容易误导。产品不会暴露完整链式思考；更稳妥的说法是：这类模型在回答前使用额外推理 token/计算预算，并经过强化学习优化复杂推理表现。</span>
       <p class="body-text">这是从强化学习中涌现出来的：模型发现"反复琢磨"的策略在难题上能拿到更好的结果。它会试想法、回退、复核推理——很像你解决问题时的内心独白。</p>
       <p class="body-text">Karpathy 提到，Claude 3.7 Sonnet（非思考型）解出了一道 o1 Pro 没能解出的高难度编码题。模型选择并不总是显而易见——选什么取决于具体任务。</p>
       <div class="insight-box">
@@ -276,6 +280,7 @@
       <div class="insight-box" style="margin-top:16px">
         <strong>Perplexity vs ChatGPT 搜索</strong>
         Perplexity 总是会搜索——它从设计上就是搜索优先。ChatGPT 的搜索需要按消息逐个开启。对于研究密集型工作流，Perplexity 默认开启的方式常常省去了"该不该开"的决策成本。
+        <span class="fact-note" role="note"><strong>科学批注</strong>“总是搜索”和“ChatGPT 必须逐条开启”都是产品 UI 层面的阶段性描述。搜索是否自动触发、是否引用来源、是否进入研究模式，会随产品设置、套餐和模型版本改变。</span>
       </div>
     </div>
   </div>
@@ -290,6 +295,7 @@
       <p class="body-text"><span class="highlight">深度研究（Deep Research）</span> = 扩展思考 + 联网搜索，跑 5–15 分钟。模型并行检索几十个来源，跨来源做推理，再产出一份结构化报告——人类研究员往往要做几个小时。</p>
       <p class="body-text">Karpathy 的演示：研究雷帕霉素与长寿。模型查阅了 27 个以上的来源，思考了 5 分钟，产出一份覆盖作用机制（mTOR 抑制）、虫/鼠/人体试验数据、安全性顾虑、以及在研项目的报告。</p>
       <p class="body-text"><strong>ChatGPT Deep Research</strong>（需要 200 美元/月的 Pro 套餐）和 <strong>Perplexity</strong> 的研究模式都提供这个能力。对于文献综述、竞品分析、决策尽调——它把研究门槛大幅降低。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>“必须 200 美元/月 Pro”已经容易过期。OpenAI 后续把 Deep Research 扩展到更多套餐并按额度区分；页面应标注这是讲座录制时的状态，而不是长期价格规则。</span>
       <div class="insight-box">
         <strong>最适合用</strong>
         科学文献综述、竞品格局分析、决策尽调、医疗/法律研究（需要复核）。简单事实问题不值得用。
@@ -503,6 +509,7 @@ plt.show()</div>
       <h2 class="section-title">语音与<br><span>音频</span></h2>
       <p class="body-text">Karpathy 大约<span class="highlight">一半的查询走语音</span>，使用 Super Whisper——他在 Super Whisper、WhisperFlow、MacWhisper 三者中的选择。按下热键、说话、再按一次——查询被转写并发出。无需打字，无障碍。</p>
       <p class="body-text">ChatGPT 的<span class="highlight">高级语音模式（Advanced Voice Mode）</span>更进一步：音频 token 直接输入输出模型，没有中间的文字转写层。结果听起来真的像在对话，而不是 TTS 套壳。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>这是对 GPT-4o 原生音频能力的合理概括，但产品实现会变：不同语音模式可能混合 ASR、语音到语音模型、TTS、安全分类器和工具层。不要把“没有中间转写层”当作所有语音产品的永久架构。</span>
       <p class="body-text"><span class="highlight">NotebookLM</span>（Google）能把你的文档生成音频播客。上传论文、书籍或笔记——它会产出双主播讨论。Karpathy 在散步与长途驾驶时用它对自己专业之外的话题做被动学习。</p>
       <div class="insight-box">
         <strong>Karpathy 的语音小贴士</strong>
@@ -782,7 +789,7 @@ plt.show()</div>
         <div class="ps-num">02</div>
         <div class="ps-content">
           <div class="ps-title" style="color:var(--accent)">了解你的套餐与模型</div>
-          <div class="ps-desc">免费 → 受限。20 美元/月 → GPT-4o / Claude Sonnet。200 美元/月 → o1 Pro、深度研究。模型对应任务——硬推理用思考型、简单查询用快模型。</div>
+          <div class="ps-desc">免费 → 受限。20 美元/月 → GPT-4o / Claude Sonnet。200 美元/月 → o1 Pro、深度研究。模型对应任务——硬推理用思考型、简单查询用快模型。<span class="fact-note" role="note"><strong>科学批注</strong>套餐、模型名和额度是最高频变化项。这里应视为 2025 年讲座快照；到 2026 年，具体默认模型、订阅权益和价格必须查官方页面。</span></div>
           <div class="ps-tags"><span class="tag tag-p">模型</span></div>
         </div>
       </div>
@@ -800,7 +807,7 @@ plt.show()</div>
         <div class="ps-num">04</div>
         <div class="ps-content">
           <div class="ps-title" style="color:var(--accent)">用深度研究做多源综合</div>
-          <div class="ps-desc">5–15 分钟、20–30 个来源、结构化报告。文献综述与决策尽调中确实有用。当前 ChatGPT 上需要 200 美元/月套餐；Perplexity 更便宜。</div>
+          <div class="ps-desc">5–15 分钟、20–30 个来源、结构化报告。文献综述与决策尽调中确实有用。当前 ChatGPT 上需要 200 美元/月套餐；Perplexity 更便宜。<span class="fact-note" role="note"><strong>科学批注</strong>同上，Deep Research 的可用套餐和额度已经变化；“当前需要 200 美元/月”不应保留为无日期断言。</span></div>
           <div class="ps-tags"><span class="tag tag-c">研究</span></div>
         </div>
       </div>
@@ -827,7 +834,7 @@ plt.show()</div>
         <div class="ps-num">07</div>
         <div class="ps-content">
           <div class="ps-title" style="color:var(--accent)">现阶段 ChatGPT 仍是默认</div>
-          <div class="ps-desc">功能最多、生态最大、体验最完善。编码看 Claude，搜索优先看 Perplexity。格局变化很快——确定方案前去 LM Arena 看一眼当前排名。</div>
+          <div class="ps-desc">功能最多、生态最大、体验最完善。编码看 Claude，搜索优先看 Perplexity。格局变化很快——确定方案前去 LM Arena 看一眼当前排名。<span class="fact-note" role="note"><strong>科学批注</strong>这是使用偏好，不是科学事实。更稳妥的建议是：按任务、数据敏感性、价格、延迟、上下文长度、工具能力和实测样例选择，而不是把某个产品设为永久默认。</span></div>
           <div class="ps-tags"><span class="tag tag-p">生态</span></div>
         </div>
       </div>

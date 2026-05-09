@@ -84,6 +84,8 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
 .card-glow{border-color:var(--border-b);box-shadow:0 0 30px rgba(0,229,255,0.06) inset,0 0 0 1px rgba(0,229,255,0.06)}
 .insight-box{background:var(--cyan-g);border:1px solid var(--border-b);border-radius:8px;padding:16px 20px;margin-top:24px;font-size:14px;color:var(--txt)}
 .insight-box strong{color:var(--cyan);font-family:var(--dm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px}
+.fact-note{display:block;margin:10px 0 16px;padding:10px 13px;background:var(--red-d);border:1px solid rgba(255,82,82,0.28);border-left:3px solid var(--red);border-radius:0 6px 6px 0;color:var(--red);font-family:var(--db);font-size:13px;line-height:1.55}
+.fact-note strong{font-family:var(--dm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-right:6px;color:var(--red)}
 
 /* ── Tags / Badges ── */
 .tag{font-family:var(--dm);font-size:11px;padding:3px 9px;border-radius:4px;border:1px solid;display:inline-flex;align-items:center;gap:5px}
@@ -384,6 +386,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
       <div class="stat-item"><dt class="stat-lbl">文本数据</dt><dd class="stat-val">44 TB</dd></div>
       <div class="stat-item"><dt class="stat-lbl">Token 词表</dt><dd class="stat-val">100K</dd></div>
     </dl>
+    <span class="fact-note" role="note"><strong>科学批注</strong>v1 是旧版页面，保留了多处未经收紧的数字：GPT-4 词表/参数未公开，405B 更像 Llama 3.1 405B，FineWeb 的 token 数也随版本更新。请优先阅读 v2 中的红色批注。</span>
     <div class="scroll-hint" aria-hidden="true"><div class="scroll-arrow"></div>滚动以继续探索</div>
   </div>
 </section>
@@ -396,6 +399,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
       <h2 class="section-title">下载<br>整个互联网</h2>
       <p class="body-text">第一步是收集海量的文本。<span class="highlight">Common Crawl</span> 这类机构自 2007 年起就在持续抓取网页——单次月度抓取约含 27 亿网页（2024 年量级），自 2007 年以来的累计存档则远大于此。这些原始数据再被过滤为像 <span class="highlight">FineWeb</span> 这样的高质量数据集。</p>
       <p class="body-text">目标是：<em>大量</em>、<em>高质量</em>且<em>多样化</em>的文档。经过激进的过滤后，最终大约剩下 <span class="highlight-a">44 TB</span>——相当于 10 块消费级硬盘的文本——约对应 15 万亿 token。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>FineWeb 的“44TB/15T”应标成特定版本量级；公开数据页后续已更新，不能作为永久规格。</span>
       <div class="insight-box">
         <strong>核心洞察</strong>
         训练数据的质量与多样性，对最终模型表现的影响几乎超过其他一切因素。垃圾进，垃圾出——只不过这里的"垃圾"是万亿 token 量级的。
@@ -460,6 +464,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <h2 class="section-title">分词（Tokenization）</h2>
         <p class="body-text">神经网络无法直接处理原始文本——它需要数字。解决办法就是<span class="highlight">分词</span>：把文本切分成 token（子词块），并为每个 token 分配一个 ID。</p>
         <p class="body-text">GPT-4 使用一个 <span class="highlight">100,277 个 token</span> 的词表，通过<span class="highlight-a">字节对编码（BPE）</span>算法构建。BPE 从单个字节（256 个符号）开始，反复合并出现频率最高的相邻字节对——在压缩序列长度的同时扩展词表。</p>
+        <span class="fact-note" role="note"><strong>科学批注</strong>100,277 是公开 `cl100k_base` 分词器量级，不是 GPT-4 官方披露的词表大小。GPT-4 tokenizer 细节未公开确认。</span>
         <div class="insight-box">
           <strong>为什么不直接用单词？</strong>
           单词的变体是无穷的。"run"、"running"、"runner" 会变成 3 个独立条目。子词 token 共享词根："run" + "ning"、"run" + "ner"。这样还能高效处理新词、拼写错误以及多种语言。
@@ -510,6 +515,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <div class="insight-box">
           <strong>规模</strong>
           GPT-2（2019 年）：16 亿参数，1000 亿 token，训练约 4 万美元。今天：同等质量大约只需 100 美元。Llama 3：4050 亿参数，15 万亿 token。现代前沿模型：数千亿参数、万亿级 token。
+          <span class="fact-note" role="note"><strong>科学批注</strong>GPT-2 最大公开版本是 1.5B 参数，WebText 约 40GB；“1000 亿 token”和“同等质量 100 美元”都缺少背景，容易把玩具级复现误写成完整 GPT-2 复刻。</span>
         </div>
       </div>
       <div class="fade-up" style="animation-delay:.15s">
@@ -872,7 +878,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <div class="ps-num">02</div>
         <div class="ps-content" style="border-left:3px solid var(--amber)">
           <div class="ps-title" style="color:var(--amber)">分词（Tokenization）</div>
-          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是一个带整数 ID 的子词块。GPT-4 词表：100,277 个 token。</div>
+          <div class="ps-desc">文本 → UTF-8 字节 → 字节对编码 → 15 万亿 token 序列。每个 token 是一个带整数 ID 的子词块。GPT-4 词表：100,277 个 token。<span class="fact-note" role="note"><strong>科学批注</strong>GPT-4 的确切词表未公开确认；这里应写“OpenAI 常见公开分词器约 10 万 token”。</span></div>
           <div class="ps-tags"><span class="tag tag-a">BPE</span><span class="tag tag-a">100K 词表</span><span class="tag tag-a">子词单元</span></div>
         </div>
       </div>
@@ -899,7 +905,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <div class="ps-num">05</div>
         <div class="ps-content" style="border-left:3px solid var(--green)">
           <div class="ps-title" style="color:var(--green)">监督微调（SFT）</div>
-          <div class="ps-desc">基础模型在人工标注的对话数据上重新训练。标注员遵循公司规范写理想回答：有用、真实、无害。现代数据集：数百万条合成 + 人工筛选的对话。耗时：小时级（不是数月）。</div>
+          <div class="ps-desc">基础模型在人工标注的对话数据上重新训练。标注员遵循公司规范写理想回答：有用、真实、无害。现代数据集：数百万条合成 + 人工筛选的对话。耗时：小时级（不是数月）。<span class="fact-note" role="note"><strong>科学批注</strong>SFT 通常远短于预训练，但“小时级”不能概括超大模型、多轮安全/偏好微调。</span></div>
           <div class="ps-tags"><span class="tag tag-g">人工标注员</span><span class="tag tag-g">InstructGPT</span><span class="tag tag-g">UltraChat</span><span class="tag tag-g">约 3 小时</span></div>
         </div>
       </div>
@@ -908,7 +914,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <div class="ps-num">06</div>
         <div class="ps-content" style="border-left:3px solid var(--red)">
           <div class="ps-title" style="color:var(--red)">RLHF</div>
-          <div class="ps-desc">人工评估者对模型输出排序。奖励模型学会这些偏好。语言模型再通过强化学习优化以拿到更高分——产生更有用、结构更好、更诚实的回答。</div>
+          <div class="ps-desc">人工评估者对模型输出排序。奖励模型学会这些偏好。语言模型再通过强化学习优化以拿到更高分——产生更有用、结构更好、更诚实的回答。<span class="fact-note" role="note"><strong>科学批注</strong>RLHF 优化的是奖励模型预测的人类偏好，不直接保证真实性；也可能强化谄媚、过度自信或奖励黑客。</span></div>
           <div class="ps-tags"><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">奖励模型</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">PPO</span><span class="tag tag-g" style="color:var(--red);border-color:rgba(255,82,82,.25);background:var(--red-d)">人类偏好</span></div>
         </div>
       </div>
@@ -917,7 +923,7 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <div class="ps-num">07</div>
         <div class="ps-content" style="border-left:3px solid var(--cyan);background:linear-gradient(135deg,rgba(0,229,255,0.06),transparent)">
           <div class="ps-title" style="color:var(--cyan)">🤖 ChatGPT / Claude / Gemini</div>
-          <div class="ps-desc">最终的助手。一个对资深人工标注员的统计模拟，背后是对互联网的庞大压缩表示。不是魔法——而是大规模工程上的非凡成就。</div>
+          <div class="ps-desc">最终的助手。一个对资深人工标注员的统计模拟，背后是对互联网的庞大压缩表示。不是魔法——而是大规模工程上的非凡成就。<span class="fact-note" role="note"><strong>科学批注</strong>助手行为不是单纯“模拟标注员”，而是预训练、SFT、偏好优化、安全策略、系统提示和工具环境共同作用。</span></div>
           <div class="ps-tags"><span class="tag tag-c">对话式</span><span class="tag tag-c">有用 · 真实 · 无害</span><span class="tag tag-c">工具调用</span></div>
         </div>
       </div>

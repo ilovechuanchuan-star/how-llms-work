@@ -203,6 +203,7 @@ ys = [<span class="nm">1.0</span>, <span class="nm">-1.0</span>, <span class="nm
       <h2 class="section-title">层与<br>多层感知机</h2>
       <p class="body-text">单个神经元学不会复杂模式。我们把它们叠成<span class="highlight">层</span>，再把层叠成<span class="highlight-a">多层感知机（MLP，Multi-Layer Perceptron）</span>。可以把它当成一条流水线：第一层看原始输入，下一层再看第一层提取出的内容，以此类推。</p>
       <p class="body-text">神经元间的每一根连线都是一个权重。一个 4 输入 → 3 神经元 → 1 输出的网络有 <span class="highlight">(4×3) + (3×1) = 15 个权重</span>，再加偏置。GPT-4 是同样的结构，只不过权重数量是 4050 亿。</p>
+      <span class="fact-note" role="note"><strong>科学批注</strong>这句话同时有两个问题：GPT-4 的参数量没有官方公开，不能写成 4050 亿；Transformer 也不是“同样的 MLP 结构”，它包含 attention、MLP 子层、残差连接、归一化等组件。405B 更接近 Meta 已公开的 Llama 3.1 405B。</span>
       <div class="code-block">
 <span class="kw">class</span> <span class="fn">Neuron</span>:
   <span class="kw">def</span> <span class="fn">__init__</span>(<span class="nm">self</span>, nin):
@@ -321,6 +322,7 @@ print(loss.data)  <span class="co"># 例如 4.73 —— 一开始非常糟</span
       <div class="insight-box" style="margin-top:16px">
         <strong>Loss 必须是单一数值</strong>
         这一点很关键。我们需要"一个数"，才能有"一个方向"去优化。如果 loss 是一个向量，就不知道往哪儿走。
+        <span class="fact-note" role="note"><strong>科学批注</strong>教学上这样讲可以，但严格说多目标/向量损失也能通过加权和、Pareto 优化或约束优化处理。神经网络训练常用标量 loss，是因为标量目标便于反向传播和优化器更新。</span>
       </div>
     </div>
   </div>
