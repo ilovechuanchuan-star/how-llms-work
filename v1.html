@@ -394,8 +394,8 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
     <div class="col-text fade-up">
       <div class="chapter-badge" aria-hidden="true">第 1 章 · 预训练 · 阶段 1</div>
       <h2 class="section-title">下载<br>整个互联网</h2>
-      <p class="body-text">The first step is collecting an enormous amount of text. Organizations like <span class="highlight">Common Crawl</span> have been crawling the web since 2007 — indexing 2.7 billion pages by 2024. This raw data is then filtered into a high-quality dataset like <span class="highlight">FineWeb</span>.</p>
-      <p class="body-text">The goal: <em>large quantity</em> of <em>high quality</em>, <em>diverse</em> documents. After aggressive filtering, you end up with about <span class="highlight-a">44 terabytes</span> — roughly 10 consumer hard drives worth of text — representing ~15 trillion tokens.</p>
+      <p class="body-text">第一步是收集海量的文本。<span class="highlight">Common Crawl</span> 这类机构自 2007 年起就在持续抓取网页——单次月度抓取约含 27 亿网页（2024 年量级），自 2007 年以来的累计存档则远大于此。这些原始数据再被过滤为像 <span class="highlight">FineWeb</span> 这样的高质量数据集。</p>
+      <p class="body-text">目标是：<em>大量</em>、<em>高质量</em>且<em>多样化</em>的文档。经过激进的过滤后，最终大约剩下 <span class="highlight-a">44 TB</span>——相当于 10 块消费级硬盘的文本——约对应 15 万亿 token。</p>
       <div class="insight-box">
         <strong>核心洞察</strong>
         训练数据的质量与多样性，对最终模型表现的影响几乎超过其他一切因素。垃圾进，垃圾出——只不过这里的"垃圾"是万亿 token 量级的。
@@ -407,43 +407,43 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
         <div class="pipeline-node active" data-stage="0" role="button" tabindex="0" aria-expanded="true" aria-label="Common Crawl —— 点击展开">
           <div class="pn-title">🌐 Common Crawl</div>
           <div class="pn-sub">27 亿网页 · 原始 HTML · 始于 2007</div>
-          <div class="pn-detail">A non-profit organization that crawls the web and freely provides its data. Their bots follow links from seed pages, recursively indexing the internet. The raw archive is petabytes of gzip'd WARC files containing raw HTML.</div>
+          <div class="pn-detail">一个非营利组织，持续抓取网页并免费开放数据。它们的爬虫从种子页面递归地沿链接索引整个互联网。原始档案是数 PB 的 gzip 压缩 WARC 文件，里面是原始 HTML。</div>
         </div>
         <div class="pipeline-arrow" id="pa-0" aria-hidden="true">↓</div>
         <div class="pipeline-node" data-stage="1" role="button" tabindex="0" aria-expanded="false" aria-label="URL 过滤 —— 点击展开">
           <div class="pn-title">🚫 URL 过滤</div>
           <div class="pn-sub">黑名单 · 恶意软件 · 垃圾站 · 成人内容</div>
-          <div class="pn-detail">Block-lists of known malware sites, spam networks, adult content, marketing pages, and low-quality domains are applied. Entire domains can be removed. This is the cheapest filter so it runs first.</div>
+          <div class="pn-detail">应用已知恶意软件站点、垃圾站点网络、成人内容、营销页面以及低质量域名的黑名单，可以整个域名移除。这是最便宜的过滤步骤，所以放在最前。</div>
         </div>
         <div class="pipeline-arrow" id="pa-1" aria-hidden="true">↓</div>
         <div class="pipeline-node" data-stage="2" role="button" tabindex="0" aria-expanded="false" aria-label="文本提取 —— 点击展开">
           <div class="pn-title">📄 文本提取</div>
           <div class="pn-sub">HTML → 干净文本 · 移除导航与 CSS</div>
-          <div class="pn-detail">Raw HTML contains &lt;div&gt; tags, CSS, JavaScript, navigation menus, and ads. Parsers extract just the meaningful text content. This is harder than it sounds — heuristics decide what's "content" vs "chrome".</div>
+          <div class="pn-detail">原始 HTML 包含 &lt;div&gt; 标签、CSS、JavaScript、导航菜单和广告。解析器只提取有意义的正文内容。这件事比想象中难——什么算"内容"、什么算"外壳"，要靠启发式规则判断。</div>
         </div>
         <div class="pipeline-arrow" id="pa-2" aria-hidden="true">↓</div>
         <div class="pipeline-node" data-stage="3" role="button" tabindex="0" aria-expanded="false" aria-label="语言过滤 —— 点击展开">
           <div class="pn-title">🌍 语言过滤</div>
           <div class="pn-sub">保留英文占比 ≥65% 的页面 · 语言分类器</div>
-          <div class="pn-detail">A language classifier estimates the language of each page. Pages with less than 65% target-language content are dropped. This is a design decision — filter aggressively for one language or train multilingual.</div>
+          <div class="pn-detail">语言分类器会估计每个页面的语种。目标语种占比低于 65% 的页面会被丢弃。这是一个设计取舍——要么激进地只保留单语种，要么训练多语种模型。</div>
         </div>
         <div class="pipeline-arrow" id="pa-3" aria-hidden="true">↓</div>
         <div class="pipeline-node" data-stage="4" role="button" tabindex="0" aria-expanded="false" aria-label="去重 —— 点击展开">
           <div class="pn-title">♻️ 去重</div>
           <div class="pn-sub">精确与模糊匹配 · 减少重复</div>
-          <div class="pn-detail">Identical or near-identical pages appear millions of times on the internet (copied articles, boilerplate). Training on the same text repeatedly causes memorization. Dedup uses MinHash and exact-match techniques to remove duplicates.</div>
+          <div class="pn-detail">完全相同或近乎相同的页面会在互联网上出现成千上万次（转载文章、模板片段）。在同一段文本上反复训练会导致死记硬背。去重会用 MinHash 与精确匹配等技术移除重复。</div>
         </div>
         <div class="pipeline-arrow" id="pa-4" aria-hidden="true">↓</div>
         <div class="pipeline-node" data-stage="5" role="button" tabindex="0" aria-expanded="false" aria-label="PII 移除 —— 点击展开">
           <div class="pn-title">🔒 PII 移除</div>
           <div class="pn-sub">姓名 · 地址 · 社保号 · 邮箱</div>
-          <div class="pn-detail">Personally Identifiable Information is detected and either redacted or the page is dropped. Regex patterns and ML classifiers find phone numbers, emails, Social Security numbers, physical addresses, and named individuals.</div>
+          <div class="pn-detail">检测可识别个人身份信息（PII），要么打码、要么直接丢弃整页。正则规则与 ML 分类器会找出电话号码、邮箱、社保号、家庭地址，以及典型 PII 模式中的具名个人。</div>
         </div>
         <div class="pipeline-arrow" id="pa-5" aria-hidden="true">↓</div>
         <div class="pipeline-node" style="border-color:rgba(0,214,143,0.3);background:rgba(0,214,143,0.04)" data-stage="6" role="button" tabindex="0" aria-expanded="false" aria-label="FineWeb 数据集结果 —— 点击展开">
           <div class="pn-title" style="color:var(--green)">✅ FineWeb 数据集</div>
           <div class="pn-sub">44 TB · 15 万亿 token · 高质量</div>
-          <div class="pn-detail">The final filtered dataset. Articles about tornadoes in 2012, medical facts, history, code, recipes, science papers — the full breadth of human knowledge expressed in text. This becomes the training corpus.</div>
+          <div class="pn-detail">最终过滤好的数据集。2012 年关于龙卷风的报道、医学事实、历史、代码、菜谱、科研论文——以文本形式表达的全部人类知识广度。它将成为训练语料。</div>
         </div>
       </div>
       <button class="btn btn-ghost btn-sm" style="margin-top:14px" id="run-pipeline-btn">▶ 播放流水线动画</button>
@@ -1312,8 +1312,8 @@ p.body-text{color:var(--txt);font-size:15.5px;line-height:1.8;margin-bottom:16px
   const trainingTexts = {
     1: `<span class="incoherent">wqp mxr tkz bnf opc lsw mzq vdf nrt</span>`,
     500: `<span class="incoherent">the model has learn</span><span class="coherent">ing</span> <span class="incoherent">but confus</span><span class="coherent">tion</span> <span class="incoherent">still wqp</span> <span class="coherent">the model</span> <span class="incoherent">bns</span> <span class="coherent">to predict</span>...`,
-    5000: `<span class="coherent">The language model learns to predict the next token in a sequence.</span> <span class="incoherent">Training requires many thousands of</span> <span class="coherent">gradient descent steps</span> <span class="incoherent">to converge</span>.`,
-    32000: `<span class="coherent">The neural network has learned the statistical patterns of human language. It can generate coherent text on virtually any topic, answer questions, write code, and engage in multi-turn conversations.</span>`
+    5000: `<span class="coherent">语言模型在学着预测序列里的下一个 token。</span> <span class="incoherent">训练需要数千次</span> <span class="coherent">梯度下降步骤</span> <span class="incoherent">才能收敛</span>。`,
+    32000: `<span class="coherent">神经网络已经学到了人类语言的统计规律。它能在几乎任何话题上生成连贯的文本，回答问题、写代码，并进行多轮对话。</span>`
   };
 
   function drawCurve(upToStep) {

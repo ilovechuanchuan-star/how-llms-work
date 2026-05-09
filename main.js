@@ -67,7 +67,8 @@
   const messages = [
     "它是一个大语言模型——一个有 4050 亿参数的神经网络，被训练来预测序列中的下一个 token……",
     "魔法藏在权重里：15 万亿 token 的训练数据被压缩进参数中，用以编码人类知识……",
-    "你看到的每一个词都是从 100,277 个候选 token 的概率分布中采样而来。没有魔法——只是大规模的数学。"
+    "你看到的每一个词都是从约 10 万个候选 token 的概率分布中采样而来。没有魔法——只是大规模的数学。",
+    "经过预训练 + 后训练（SFT、RLHF）的层层雕琢，它最终学会扮演一个有用、稳定、可对话的助手。"
   ];
   let mi = 0, ci = 0, deleting = false, pauseTimer = null;
 
@@ -124,7 +125,7 @@
     });
 
     html += `<rect x="10" y="82" width="360" height="1" fill="#E3E8EF"/>`;
-    html += `<text x="10" y="100" font-family="JetBrains Mono" font-size="10" fill="#697386">TOKENS: ${s.tokens.length}</text>`;
+    html += `<text x="10" y="100" font-family="JetBrains Mono" font-size="10" fill="#697386">token 数：${s.tokens.length}</text>`;
     html += `<text x="370" y="100" text-anchor="end" font-family="JetBrains Mono" font-size="10" fill="#635BFF">${s.label}</text>`;
 
     steps.forEach((_, i) => {
@@ -606,17 +607,17 @@
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
   const dots = [
-    {x: .28, y: .38, c: 'rgba(5,112,222,0.65)', r: 5, lbl: 'colony', retrieved: false},
-    {x: .34, y: .30, c: 'rgba(5,112,222,0.65)', r: 5, lbl: 'capital', retrieved: false},
-    {x: .22, y: .44, c: 'rgba(5,112,222,0.5)', r: 4, lbl: 'colonists', retrieved: false},
+    {x: .28, y: .38, c: 'rgba(5,112,222,0.65)', r: 5, lbl: '殖民地', retrieved: false},
+    {x: .34, y: .30, c: 'rgba(5,112,222,0.65)', r: 5, lbl: '首府', retrieved: false},
+    {x: .22, y: .44, c: 'rgba(5,112,222,0.5)', r: 4, lbl: '殖民者', retrieved: false},
     {x: .30, y: .52, c: 'rgba(5,112,222,0.35)', r: 4, lbl: '', retrieved: false},
-    {x: .68, y: .32, c: 'rgba(123,110,102,0.55)', r: 5, lbl: 'temperature', retrieved: false},
-    {x: .74, y: .40, c: 'rgba(123,110,102,0.55)', r: 4, lbl: 'climate', retrieved: false},
-    {x: .62, y: .25, c: 'rgba(123,110,102,0.45)', r: 4, lbl: 'geography', retrieved: false},
-    {x: .60, y: .70, c: 'rgba(123,110,102,0.5)', r: 5, lbl: 'mission', retrieved: false},
-    {x: .68, y: .62, c: 'rgba(123,110,102,0.45)', r: 4, lbl: 'launch', retrieved: false},
+    {x: .68, y: .32, c: 'rgba(123,110,102,0.55)', r: 5, lbl: '温度', retrieved: false},
+    {x: .74, y: .40, c: 'rgba(123,110,102,0.55)', r: 4, lbl: '气候', retrieved: false},
+    {x: .62, y: .25, c: 'rgba(123,110,102,0.45)', r: 4, lbl: '地理', retrieved: false},
+    {x: .60, y: .70, c: 'rgba(123,110,102,0.5)', r: 5, lbl: '任务', retrieved: false},
+    {x: .68, y: .62, c: 'rgba(123,110,102,0.45)', r: 4, lbl: '发射', retrieved: false},
     {x: .54, y: .76, c: 'rgba(123,110,102,0.35)', r: 4, lbl: '', retrieved: false},
-    {x: .31, y: .33, c: '#635BFF', r: 7, lbl: 'query ▲', isQuery: true}
+    {x: .31, y: .33, c: '#635BFF', r: 7, lbl: '查询 ▲', isQuery: true}
   ];
 
   let showQuery = false, showLines = false;
